@@ -1,0 +1,31 @@
+.carousel, .carousel-inner{
+    max-height: 400px;
+}
+
+.carousel .item{
+    background-color: #fafafa;
+}
+
+.carousel-inner img{
+    width: 100%;
+}
+
+.carousel-control.left::after, .carousel-control.right::after{
+    width: 0;
+    height: 0;
+    content: "";
+    position: absolute;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    top: 45%;
+}
+
+.carousel-control.left::after{
+    border-right: 10px solid #fff;
+    left: 20%;
+}
+
+.carousel-control.right::after{
+    border-left: 10px solid #fff;
+    right: 20%;
+}

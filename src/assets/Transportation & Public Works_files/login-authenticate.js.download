@@ -1,0 +1,55 @@
+var authenticate = (function(){
+
+   var authenticated = false;
+
+   var getAccess = function(){
+       hasAccess().done(function(data){
+           if(data){
+               setlogin();
+               authenticated = true;
+           }else{
+               console.log(data);
+               setlogout();
+               authenticated = false;
+           }
+       })
+       .fail(function(data){
+           console.log(data);
+           setlogout();
+           authenticated = false;
+       });
+   };
+
+   var hasAccess = function()
+   {
+       return $.ajax({            
+           url: "https://accounts.miamidade.gov/uaa/hasAccess",
+           xhrFields:{
+             withCredentials: true
+           },
+           method: "GET"
+       });
+   };
+    
+   var setlogin = function()
+   {
+       $("#loginId").hide();
+       $("#createAccount").hide();
+       $("#logoutId").show();
+       $('.login-container').show();
+       $('.log-in-out').hide();
+   };
+
+   var setlogout = function()
+   {
+       $("#loginId").show();
+       $("#createAccount").show();
+       $("#logoutId").hide();
+       $('.login-container').hide();
+       $('.log-in-out').show();
+   };
+
+   return {
+       getAccess: getAccess,        
+       authenticated:authenticated
+   }})();
