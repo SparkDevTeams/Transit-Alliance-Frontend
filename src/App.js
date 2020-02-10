@@ -10,7 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       carouselImages: [
-        'bus-a.jpg',
+        'bus-1.jpg',
         'bus-2.jpg',
         'bus-3.jpg'
       ],
