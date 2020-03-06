@@ -5,14 +5,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './App.css'
 import { Form, InputGroup, Button } from 'react-bootstrap';
+import {Link, Router} from 'react-router-dom';
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       carouselImages: [
-        'bus-1.jpg',
-        'bus-2.jpg',
-        'bus-3.jpg'
+        'bus-a.jpg',
+        'bus-b.jpg'
       ],
       months: [
         {
@@ -157,9 +157,11 @@ class App extends React.Component {
                   </InputGroup>
                 </Form.Group>
               </div>
-              <Form.Group className="text-center mt-4">
-                <Button type="submit" variant="success" size="lg" id="trip_plan_btn">GO</Button>
-              </Form.Group>
+
+                <Form.Group className="text-center mt-4">
+                  <Button type="submit" variant="success" size="lg" id="trip_plan_btn">GO</Button>
+                </Form.Group>
+
             </Form>
           </div>
         </div>
