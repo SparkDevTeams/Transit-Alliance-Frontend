@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import './App.css'
 import { Form, InputGroup, Button } from 'react-bootstrap';
 import {Link, Router} from 'react-router-dom';
+import API from './api/api';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -49,7 +50,8 @@ class App extends React.Component {
       tripYear: 2020,
       tripHour: 1,
       tripMinute: 1,
-      tripAMPM: "AM"
+      tripAMPM: "AM",
+      routes: [],
     }
   }
 
@@ -59,7 +61,7 @@ class App extends React.Component {
     })
   }
 
-  submitHandle = (event) => {
+  submitHandle = async (event) => {
     event.preventDefault();
     console.log(
       {
@@ -74,6 +76,8 @@ class App extends React.Component {
         tripAMPM: this.state.tripAMPM
       }
     )
+    let response = await API.getRoutes();
+    this.setState({routes: response});
   }
 
 
@@ -87,7 +91,7 @@ class App extends React.Component {
       slidesToShow: 1,
       slidesToScroll: 1   
     }
-    let { carouselImages, months, Origin, Destination, LeaveArrive, tripYear, tripMonth, tripDay, tripHour, tripMinute, tripAMPM } = this.state;
+    let { carouselImages, months, Origin, Destination, LeaveArrive, tripYear, tripMonth, tripDay, tripHour, tripMinute, tripAMPM, routes } = this.state;
     return (
       <React.Fragment>
         <Header/>
@@ -165,6 +169,12 @@ class App extends React.Component {
             </Form>
           </div>
         </div>
+        {routes.map(obj => (
+          <div>
+            <p>{obj.route_long_name}</p>
+            <p>{obj.route_id}</p>
+          </div>
+        ))}
       </React.Fragment>
     )
   }
