@@ -53,6 +53,7 @@ import API from './api/api';
       tripAMPM: "AM",
       timeInfo: [],
       tripInfo: [],
+      completeInfo: [],
     }
   }
 
@@ -83,7 +84,8 @@ import API from './api/api';
             pathname: '/Maps', 
             state : {
                 tripInfo: response.legInfo, 
-                timeInfo: response.time
+                timeInfo: response.time,
+                completeInfo: response.completePolyline
             }
         }
     );
@@ -100,7 +102,7 @@ import API from './api/api';
       slidesToShow: 1,
       slidesToScroll: 1   
     }
-    let { carouselImages, months, Origin, Destination, LeaveArrive, tripYear, tripMonth, tripDay, tripHour, tripMinute, tripAMPM, tripInfo, timeInfo } = this.state;
+    let { carouselImages, months, Origin, Destination, LeaveArrive, tripYear, tripMonth, tripDay, tripHour, tripMinute, tripAMPM, tripInfo, timeInfo, completeInfo } = this.state;
     return (
       <React.Fragment>
         <Header/>
@@ -178,16 +180,6 @@ import API from './api/api';
             </Form>
           </div>
         </div>
-        {timeInfo?.map(obj => (
-          <div>
-            <p>{obj.walkingTime}</p>
-          </div>
-        ))}
-        {tripInfo?.map(obj => (
-          <div>
-            <p>{obj.departurePlace} {obj.arrivalPlace}</p>
-          </div>
-        ))}
       </React.Fragment>
     )
   }
