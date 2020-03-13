@@ -1,12 +1,12 @@
 import React from 'react';
-import Header from './components/header';
+import Header from '../components/header';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import './App.css'
+import '../App.css'
 import { Form, InputGroup, Button } from 'react-bootstrap';
 import {Link, withRouter} from 'react-router-dom';
-import API from './api/api';
+import API from '../api/api';
  class TripForm extends React.Component {
   constructor(props) {
     super(props);
@@ -45,11 +45,11 @@ import API from './api/api';
       Origin: "",
       Destination: "",
       LeaveArrive: "Leave",
-      tripMonth: 1,
-      tripDay: 1,
-      tripYear: 2020,
-      tripHour: 1,
-      tripMinute: 1,
+      tripMonth: "1",
+      tripDay: "1",
+      tripYear: "2020",
+      tripHour: "1",
+      tripMinute: "1",
       tripAMPM: "AM",
       timeInfo: [],
       tripInfo: [],
@@ -65,20 +65,17 @@ import API from './api/api';
 
   submitHandle = async (event) => {
     event.preventDefault();
-    console.log(
-      {
-        Origin: this.state.Origin,
-        Destination: this.state.Destination,
-        LeaveArrive: this.state.LeaveArrive,
-        tripYear: this.state.tripYear,
-        tripMonth: this.state.tripMonth,
-        tripDay: this.state.tripDay,
-        tripHour: this.state.tripHour,
-        tripMinute: this.state.tripMinute,
-        tripAMPM: this.state.tripAMPM
-      }
-    )
-    let response = await API.getTripInfo();
+
+    let query = {
+      fromPlace: this.state.Origin,
+      toPlace: this.state.Destination,
+      startTime: `${this.state.tripHour}:${this.state.tripMinute}${this.state.tripAMPM}`,
+      startDate: `${this.state.tripMonth}-${this.state.tripDay}-${this.state.tripYear}`,
+      arriveBy: this.state.LeaveArrive !== 'Leave',
+
+    }
+
+    let response = await API.getTripInfo(query);
     this.props.history.push(
         {
             pathname: '/Maps', 
@@ -112,7 +109,7 @@ import API from './api/api';
               carouselImages.map((carouselImage, idx) => {
                 return (
                   <div key={idx}>
-                    <img src={require(`./assets/images/${carouselImage}`)} alt="img"/>
+                    <img src={require(`../assets/images/${carouselImage}`)} alt="img"/>
                   </div>
                 )
               })
