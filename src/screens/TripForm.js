@@ -50,7 +50,7 @@ import API from '../api/api';
       tripYear: "2020",
       tripHour: "1",
       tripMinute: "1",
-      tripAMPM: "AM",
+      tripAMPM: "am",
       timeInfo: [],
       tripInfo: [],
       completeInfo: [],
@@ -71,8 +71,7 @@ import API from '../api/api';
       toPlace: this.state.Destination,
       startTime: `${this.state.tripHour}:${this.state.tripMinute}${this.state.tripAMPM}`,
       startDate: `${this.state.tripMonth}-${this.state.tripDay}-${this.state.tripYear}`,
-      arriveBy: this.state.LeaveArrive !== 'Leave',
-
+      arriveBy: this.state.LeaveArrive === 'Leave' ? 'false' : 'true',
     }
 
     let response = await API.getTripInfo(query);
@@ -146,10 +145,10 @@ import API from '../api/api';
                     </Form.Control>
                     <Form.Control as="select" name="tripYear" value={tripYear} onChange={($event) => this.changeInput('tripYear', $event.target.value)}>
                       <option value="2020">2020</option>
-                      <option value="2019">2021</option>
-                      <option value="2018">2022</option>
-                      <option value="2017">2023</option>
-                      <option value="2016">2024</option>
+                      <option value="2021">2021</option>
+                      <option value="2022">2022</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
                     </Form.Control>
                   </InputGroup>
                 </Form.Group>
@@ -163,8 +162,8 @@ import API from '../api/api';
                       {[...Array(60)].map((minute, idx) => <option value={idx+1} key={idx}>{idx < 9 ? '0' + (idx + 1) : idx + 1}</option>)}
                     </Form.Control>
                     <Form.Control as="select" name="tripAMPM" value={tripAMPM} onChange={($event) => this.changeInput('tripAMPM', $event.target.value)}>
-                      <option value="AM">AM</option>
-                      <option value="PM">PM</option>
+                      <option value="am">AM</option>
+                      <option value="pm">PM</option>
                     </Form.Control>
                   </InputGroup>
                 </Form.Group>
