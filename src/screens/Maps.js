@@ -25,7 +25,7 @@ class Maps extends React.Component {
     return (
       <Map center={[25.8, -80.3]} zoom={12}>
           {/*this.props.location.state?.newInfo?.legInfo?.map(info => <Polyline positions={info.legPolyline} color={colorArray[Math.floor(Math.random() * colorArray.length)]}/>)*/}
-        {this.props.location.state?.newInfo?.completePolyline.map(line => <Polyline positions={line} color={colorArray[Math.floor(Math.random() * colorArray.length)]}/>)}
+        {this.props.location.state?.newInfo?.completePolyline?.map(line => <Polyline positions={line} color={colorArray[Math.floor(Math.random() * colorArray.length)]}/>)}
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
