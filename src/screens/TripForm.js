@@ -97,7 +97,7 @@ import API from '../api/api';
       slidesToShow: 1,
       slidesToScroll: 1   
     }
-    let { carouselImages, months, Origin, Destination, LeaveArrive, tripYear, tripMonth, tripDay, tripHour, tripMinute, tripAMPM, tripInfo, timeInfo, completeInfo } = this.state;
+    let { carouselImages, months, Origin, Destination, LeaveArrive, tripYear, tripMonth, tripDay, tripHour, tripMinute, tripAMPM} = this.state;
     return (
       <React.Fragment>
         <Header/>
