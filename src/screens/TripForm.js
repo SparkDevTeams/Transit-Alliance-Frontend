@@ -79,9 +79,8 @@ import API from '../api/api';
         {
             pathname: '/Maps', 
             state : {
-                tripInfo: response.legInfo, 
-                timeInfo: response.time,
-                completeInfo: response.completePolyline
+                oldInfo: response.oldResponse, 
+                newInfo: response.prototypeResponse,
             }
         }
     );
