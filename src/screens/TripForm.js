@@ -130,7 +130,7 @@ import API from '../api/api';
                 <Form.Group>
                   <div className="custom-inline-checkbox text-center">
                     <Form.Check custom inline type="radio" name="LeaveArrive" label="Leave" value="Leave" id="custom-checkbox-1" onChange={($event) => this.changeInput('LeaveArrive', $event.target.value)} checked={LeaveArrive === "Leave"}/>
-                    <Form.Check custom inline type="radio" name="LeaveArrive" label="Arrive" value="Arrive" id="custom-checkbox-2" onChange={($event) => this.changeInput('LeaveArrive', $event.target.value)} checked={LeaveArrive === "Active"}/>
+                    <Form.Check custom inline type="radio" name="LeaveArrive" label="Arrive" value="Arrive" id="custom-checkbox-2" onChange={($event) => this.changeInput('LeaveArrive', $event.target.value)} checked={LeaveArrive === "Arrive"}/>
                   </div>
                 </Form.Group>
                 <Form.Group>
