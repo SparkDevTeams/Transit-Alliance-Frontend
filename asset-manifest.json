@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Transit-Alliance-Frontend/static/css/main.7f435a0c.chunk.css",
-    "main.js": "/Transit-Alliance-Frontend/static/js/main.36e82367.chunk.js",
-    "main.js.map": "/Transit-Alliance-Frontend/static/js/main.36e82367.chunk.js.map",
+    "main.js": "/Transit-Alliance-Frontend/static/js/main.ea192f4b.chunk.js",
+    "main.js.map": "/Transit-Alliance-Frontend/static/js/main.ea192f4b.chunk.js.map",
     "runtime-main.js": "/Transit-Alliance-Frontend/static/js/runtime-main.32872320.js",
     "runtime-main.js.map": "/Transit-Alliance-Frontend/static/js/runtime-main.32872320.js.map",
     "static/css/2.cadd62b9.chunk.css": "/Transit-Alliance-Frontend/static/css/2.cadd62b9.chunk.css",
     "static/js/2.fd4e56ae.chunk.js": "/Transit-Alliance-Frontend/static/js/2.fd4e56ae.chunk.js",
     "static/js/2.fd4e56ae.chunk.js.map": "/Transit-Alliance-Frontend/static/js/2.fd4e56ae.chunk.js.map",
     "index.html": "/Transit-Alliance-Frontend/index.html",
-    "precache-manifest.313852bc71c90a1a90e6bf00c0eac74a.js": "/Transit-Alliance-Frontend/precache-manifest.313852bc71c90a1a90e6bf00c0eac74a.js",
+    "precache-manifest.1bb5a3f34412fb76693f27d6513825b5.js": "/Transit-Alliance-Frontend/precache-manifest.1bb5a3f34412fb76693f27d6513825b5.js",
     "service-worker.js": "/Transit-Alliance-Frontend/service-worker.js",
     "static/css/2.cadd62b9.chunk.css.map": "/Transit-Alliance-Frontend/static/css/2.cadd62b9.chunk.css.map",
     "static/css/main.7f435a0c.chunk.css.map": "/Transit-Alliance-Frontend/static/css/main.7f435a0c.chunk.css.map",
@@ -31,6 +31,6 @@
     "static/css/2.cadd62b9.chunk.css",
     "static/js/2.fd4e56ae.chunk.js",
     "static/css/main.7f435a0c.chunk.css",
-    "static/js/main.36e82367.chunk.js"
+    "static/js/main.ea192f4b.chunk.js"
   ]
 }
