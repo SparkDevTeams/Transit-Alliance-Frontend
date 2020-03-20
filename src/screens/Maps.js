@@ -1,5 +1,5 @@
 import React from "react";
-import { Map, Marker, Popup, TileLayer, Polyline } from "react-leaflet";
+import { Map, Marker, Popup, TileLayer, Polyline, Circle } from "react-leaflet";
 import styled from "styled-components";
 import { withRouter, Redirect } from "react-router-dom";
 import { Sidebar, Tab } from 'react-leaflet-sidetabs'
@@ -41,6 +41,7 @@ class Maps extends React.Component {
     /*if (!this.props.location.state) {
       return <Redirect to="/"></Redirect>;
     } */
+    
 
     return (
       <div>
@@ -65,8 +66,14 @@ class Maps extends React.Component {
         </Sidebar>
       
         <Map center={[25.8, -80.3]} zoom={12}>
-            {/*this.props.location.state?.newInfo?.legInfo?.map(info => <Polyline positions={info.legPolyline} color={colorArray[Math.floor(Math.random() * colorArray.length)]}/>)*/}
-          {this.props.location.state?.newInfo?.completePolyline.map(line => <Polyline positions={line} color={colorArray[Math.floor(Math.random() * colorArray.length)]}/>)}
+            {/*Adds a border around the Polyline */}
+            {this.props.location.state?.newInfo?.legInfo?.map(info => <Polyline positions={info.legPolyline} color={info.transitMode=="BUS"?"black":"black"} dashArray={info.transitMode=="WALK"?'1,10':undefined} weight={info.transitMode=="BUS"?9:6} />)}
+            {this.props.location.state?.newInfo?.legInfo?.map(info => <Polyline positions={info.legPolyline} color={info.transitMode=="BUS"?colorArray[Math.floor(Math.random() * colorArray.length)]:"blue"} dashArray={info.transitMode=="WALK"?'1,10':undefined} weight={info.transitMode=="BUS"?8:5} />)}
+            {/*Adds a border around the Circle */}
+            {this.props.location.state?.newInfo?.legInfo?.map(steps => <Circle center={steps.legPolyline[0]} radius={20} color={"black"} weight={9} />)}
+            {this.props.location.state?.newInfo?.legInfo?.map(steps => <Circle center={steps.legPolyline[0]} radius={20} fillColor={"lightgrey"} fillOpacity={1} weight={2} color={"grey"} />)}
+            {/*this.props.location.state?.newInfo?.completePolyline.map(line => <Polyline positions={line} color={colorArray[Math.floor(Math.random() * colorArray.length)]}/>)*/}
+            {/* <Polyline positions={this.props.location.state.newInfo.completePolyline} /> */}
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
