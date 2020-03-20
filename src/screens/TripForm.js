@@ -77,7 +77,7 @@ import API from '../api/api';
     let response = await API.getTripInfo(query);
     this.props.history.push(
         {
-            pathname: '/Maps', 
+            pathname: '/maps', 
             state : {
                 oldInfo: response.oldResponse, 
                 newInfo: response.prototypeResponse,
