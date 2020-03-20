@@ -25,6 +25,14 @@ class Maps extends React.Component {
     });
   }
 
+  componentDidMount(){
+    console.log("mount");
+    this.setState({newInfo: this.props.location.state?.newInfo, oldInfo: this.props.location.state?.oldInfo});
+  }
+
+  componentDidUpdate(){
+    console.log("update");
+  }
   render() {
     var colorArray = [
       "#FF6633",
@@ -75,7 +83,7 @@ class Maps extends React.Component {
       "#6666FF"
     ];
 
-    if (!this.props.location.state) {
+    if (!this.state.newInfo && !this.props.location.state){
       return <Redirect to="/"></Redirect>;
     }
 
@@ -108,7 +116,7 @@ class Maps extends React.Component {
 
         <Map center={[25.8, -80.3]} zoom={12}>
           {/*Adds a border around the Polyline */}
-          {this.props.location.state?.newInfo?.legInfo?.map((info, idx) => (
+          {this.state.newInfo?.legInfo?.map((info, idx) => (
             <>
               <Polyline
                 positions={info.legPolyline}
