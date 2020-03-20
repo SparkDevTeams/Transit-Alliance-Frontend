@@ -108,11 +108,11 @@ class Maps extends React.Component {
 
         <Map center={[25.8, -80.3]} zoom={12}>
           {/*Adds a border around the Polyline */}
-          {this.props.location.state?.newInfo?.legInfo?.map(info => (
+          {this.props.location.state?.newInfo?.legInfo?.map((info, idx) => (
             <>
               <Polyline
                 positions={info.legPolyline}
-                color={info.transitMode === "BUS" ? "black" : "black"}
+                color={"black"}
                 dashArray={info.transitMode === "WALK" ? "1,10" : undefined}
                 weight={info.transitMode === "BUS" ? 9 : 6}
               />
@@ -126,20 +126,24 @@ class Maps extends React.Component {
                 dashArray={info.transitMode === "WALK" ? "1,10" : undefined}
                 weight={info.transitMode === "BUS" ? 8 : 5}
               />
-              <Circle
-                center={info.legPolyline[0]}
-                radius={20}
-                color={"black"}
-                weight={9}
-              />
-              <Circle
-                center={info.legPolyline[0]}
-                radius={20}
-                fillColor={"lightgrey"}
-                fillOpacity={1}
-                weight={2}
-                color={"grey"}
-              />
+              {idx === 0 ? null : (
+                <>
+                  <Circle
+                    center={info.legPolyline[0]}
+                    radius={20}
+                    color={"black"}
+                    weight={9}
+                  />
+                  <Circle
+                    center={info.legPolyline[0]}
+                    radius={20}
+                    fillColor={"lightgrey"}
+                    fillOpacity={1}
+                    weight={2}
+                    color={"grey"}
+                  />
+                </>
+              )}
             </>
           ))}
           {/*this.props.location.state?.newInfo?.completePolyline.map(line => <Polyline positions={line} color={colorArray[Math.floor(Math.random() * colorArray.length)]}/>)*/}
