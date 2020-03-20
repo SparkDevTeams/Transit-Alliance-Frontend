@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/Transit-Alliance-Frontend/static/css/main.7f435a0c.chunk.css",
-    "main.js": "/Transit-Alliance-Frontend/static/js/main.ea192f4b.chunk.js",
-    "main.js.map": "/Transit-Alliance-Frontend/static/js/main.ea192f4b.chunk.js.map",
+    "main.js": "/Transit-Alliance-Frontend/static/js/main.e8e2a8c0.chunk.js",
+    "main.js.map": "/Transit-Alliance-Frontend/static/js/main.e8e2a8c0.chunk.js.map",
     "runtime-main.js": "/Transit-Alliance-Frontend/static/js/runtime-main.32872320.js",
     "runtime-main.js.map": "/Transit-Alliance-Frontend/static/js/runtime-main.32872320.js.map",
     "static/css/2.cadd62b9.chunk.css": "/Transit-Alliance-Frontend/static/css/2.cadd62b9.chunk.css",
-    "static/js/2.fd4e56ae.chunk.js": "/Transit-Alliance-Frontend/static/js/2.fd4e56ae.chunk.js",
-    "static/js/2.fd4e56ae.chunk.js.map": "/Transit-Alliance-Frontend/static/js/2.fd4e56ae.chunk.js.map",
+    "static/js/2.d149ce6e.chunk.js": "/Transit-Alliance-Frontend/static/js/2.d149ce6e.chunk.js",
+    "static/js/2.d149ce6e.chunk.js.map": "/Transit-Alliance-Frontend/static/js/2.d149ce6e.chunk.js.map",
     "index.html": "/Transit-Alliance-Frontend/index.html",
-    "precache-manifest.1bb5a3f34412fb76693f27d6513825b5.js": "/Transit-Alliance-Frontend/precache-manifest.1bb5a3f34412fb76693f27d6513825b5.js",
+    "precache-manifest.763351e3a7d0c580a7fc865073ff9347.js": "/Transit-Alliance-Frontend/precache-manifest.763351e3a7d0c580a7fc865073ff9347.js",
     "service-worker.js": "/Transit-Alliance-Frontend/service-worker.js",
     "static/css/2.cadd62b9.chunk.css.map": "/Transit-Alliance-Frontend/static/css/2.cadd62b9.chunk.css.map",
     "static/css/main.7f435a0c.chunk.css.map": "/Transit-Alliance-Frontend/static/css/main.7f435a0c.chunk.css.map",
-    "static/js/2.fd4e56ae.chunk.js.LICENSE.txt": "/Transit-Alliance-Frontend/static/js/2.fd4e56ae.chunk.js.LICENSE.txt",
+    "static/js/2.d149ce6e.chunk.js.LICENSE.txt": "/Transit-Alliance-Frontend/static/js/2.d149ce6e.chunk.js.LICENSE.txt",
     "static/media/bus-1.jpg": "/Transit-Alliance-Frontend/static/media/bus-1.81539b7e.jpg",
     "static/media/bus-2.jpg": "/Transit-Alliance-Frontend/static/media/bus-2.1de8e011.jpg",
     "static/media/bus-3.jpg": "/Transit-Alliance-Frontend/static/media/bus-3.c50e6d47.jpg",
@@ -29,8 +29,8 @@
   "entrypoints": [
     "static/js/runtime-main.32872320.js",
     "static/css/2.cadd62b9.chunk.css",
-    "static/js/2.fd4e56ae.chunk.js",
+    "static/js/2.d149ce6e.chunk.js",
     "static/css/main.7f435a0c.chunk.css",
-    "static/js/main.ea192f4b.chunk.js"
+    "static/js/main.e8e2a8c0.chunk.js"
   ]
 }
