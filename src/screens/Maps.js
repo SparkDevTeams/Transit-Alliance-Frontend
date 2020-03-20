@@ -26,13 +26,9 @@ class Maps extends React.Component {
   }
 
   componentDidMount(){
-    console.log("mount");
     this.setState({newInfo: this.props.location.state?.newInfo, oldInfo: this.props.location.state?.oldInfo});
   }
-
-  componentDidUpdate(){
-    console.log("update");
-  }
+  
   render() {
     var colorArray = [
       "#FF6633",
