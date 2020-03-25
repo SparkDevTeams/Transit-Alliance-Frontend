@@ -27,7 +27,7 @@ class Maps extends React.Component {
 
   componentDidMount(){
     console.log("mount");
-    this.setState({newInfo: this.props.location.state?.newInfo, oldInfo: this.props.location.state?.oldInfo});
+    this.setState({newInfo: this.props.location.state?.newInfo, oldInfo: this.props.location.state?.oldInfo}, () => console.log(this.state));
   }
 
   componentDidUpdate(){
@@ -82,11 +82,14 @@ class Maps extends React.Component {
       "#99E6E6",
       "#6666FF"
     ];
+    //map position
+    var position = [25.8, -80.3];
+    var zoomLevel = 12;
 
     if (!this.state.newInfo && !this.props.location.state){
       return <Redirect to="/"></Redirect>;
     }
-
+    
     return (
       <div>
         <Sidebar
@@ -114,9 +117,9 @@ class Maps extends React.Component {
           </Tab>
         </Sidebar>
 
-        <Map center={[25.8, -80.3]} zoom={12}>
+        <Map center={position} zoom={zoomLevel}>
           {/*Adds a border around the Polyline */}
-          {this.state.newInfo?.legInfo?.map((info, idx) => (
+          {this.state.newInfo?.legInfo?.map((info, idx, idk) => (
             <>
               <Polyline
                 positions={info.legPolyline}
@@ -134,7 +137,7 @@ class Maps extends React.Component {
                 dashArray={info.transitMode === "WALK" ? "1,10" : undefined}
                 weight={info.transitMode === "BUS" ? 8 : 5}
               />
-              {idx === 0 ? null : (
+              {idx === 0 ? <Marker position={info.legPolyline[0]}/> : (
                 <>
                   <Circle
                     center={info.legPolyline[0]}
@@ -150,6 +153,7 @@ class Maps extends React.Component {
                     weight={2}
                     color={"grey"}
                   />
+                  {   }
                 </>
               )}
             </>
@@ -163,6 +167,7 @@ class Maps extends React.Component {
         </Map>
       </div>
     );
+    this.setState({lat: 25.8, long: 200})
   }
 }
 
