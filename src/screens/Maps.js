@@ -1,7 +1,6 @@
 import React from "react";
 import { Map, Marker, Popup, TileLayer, Polyline, Circle } from "react-leaflet";
 import {Accordion, Card, Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap"
-import styled from "styled-components";
 import { withRouter, Redirect } from "react-router-dom";
 import { Sidebar, Tab } from "react-leaflet-sidetabs";
 import {FiChevronRight, FiSettings} from "react-icons/fi";
@@ -13,7 +12,8 @@ class Maps extends React.Component {
     super(props);
     this.state = {
       collapsed: true,
-      selected: "home"
+      selected: "home",
+      currentStep: 0
     };
   }
 
@@ -28,7 +28,6 @@ class Maps extends React.Component {
   }
 
   componentDidMount(){
-    console.log("mount");
     this.setState({newInfo: this.props.location.state?.newInfo, oldInfo: this.props.location.state?.oldInfo}, () => (console.log(this.state)));
   }
   
@@ -100,16 +99,9 @@ class Maps extends React.Component {
           onOpen={this.onOpen.bind(this)}
           onClose={this.onClose.bind(this)}
         >
-          {/*<Navbar bg="light" expand="lg">
-            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-              </Form>
-            </Navbar.Collapse>
-          </Navbar> */}
           <Tab id="walk" header="Walk/Bus" icon={<FaBusAlt />}>
+            <p>{this.state.currentStep}</p>
+            <input type="range" onChange={(e) => this.setState({currentStep : e.target.value})}/>
             {this.state.newInfo?.legInfo?.map((info, idx) => (
               <Accordion defaultActiveKey="1">
               <Card>
@@ -207,7 +199,6 @@ class Maps extends React.Component {
         </Map>
       </div>
     );
-    this.setState({lat: 25.8, long: 200})
   }
 }
 

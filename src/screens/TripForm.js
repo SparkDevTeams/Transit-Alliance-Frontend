@@ -54,7 +54,7 @@ import API from '../api/api';
       timeInfo: [],
       tripInfo: [],
       completeInfo: [],
-      optimize: "optimize",
+      optimize: "QUICK",
       maxWalkDistance: "5"
     }
   }
@@ -74,7 +74,7 @@ import API from '../api/api';
       startTime: `${this.state.tripHour}:${this.state.tripMinute}${this.state.tripAMPM}`,
       startDate: `${this.state.tripMonth}-${this.state.tripDay}-${this.state.tripYear}`,
       arriveBy: this.state.LeaveArrive === 'Leave' ? 'false' : 'true',
-      optimize: this.state.optimize === 'QUICK' ? 'false' : 'true',
+      optimize: this.state.optimize,
       maxWalkDistance: `${this.state.maxWalkDistance}`
     }
 
