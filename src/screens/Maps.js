@@ -29,7 +29,7 @@ class Maps extends React.Component {
 
   componentDidMount(){
     console.log("mount");
-    this.setState({newInfo: this.props.location.state?.newInfo, oldInfo: this.props.location.state?.oldInfo});
+    this.setState({newInfo: this.props.location.state?.newInfo, oldInfo: this.props.location.state?.oldInfo}, () => (console.log(this.state)));
   }
   
   render() {

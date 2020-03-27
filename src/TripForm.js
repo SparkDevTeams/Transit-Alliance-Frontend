@@ -54,6 +54,7 @@ import API from './api/api';
       timeInfo: [],
       tripInfo: [],
       completeInfo: [],
+      Walk: "Walk",
     }
   }
 
@@ -75,7 +76,8 @@ import API from './api/api';
         tripDay: this.state.tripDay,
         tripHour: this.state.tripHour,
         tripMinute: this.state.tripMinute,
-        tripAMPM: this.state.tripAMPM
+        tripAMPM: this.state.tripAMPM,
+        Walk: this.state.Walk
       }
     )
     let response = await API.getTripInfo();
@@ -102,7 +104,7 @@ import API from './api/api';
       slidesToShow: 1,
       slidesToScroll: 1   
     }
-    let { carouselImages, months, Origin, Destination, LeaveArrive, tripYear, tripMonth, tripDay, tripHour, tripMinute, tripAMPM, tripInfo, timeInfo, completeInfo } = this.state;
+    let { carouselImages, months, Origin, Destination, LeaveArrive, tripYear, tripMonth, tripDay, tripHour, tripMinute, tripAMPM, tripInfo, timeInfo, completeInfo, Walk } = this.state;
     return (
       <React.Fragment>
         <Header/>
@@ -132,10 +134,11 @@ import API from './api/api';
                   <Form.Label>Destination:</Form.Label>
                   <Form.Control type="text" name="Destination" value={Destination} onChange={($event) => this.changeInput('Destination', $event.target.value)}/>
                 </Form.Group>
+                
                 <Form.Group>
                   <div className="custom-inline-checkbox text-center">
-                    <Form.Check custom inline type="radio" name="LeaveArrive" label="Leave" value="Leave" id="custom-checkbox-1" onChange={($event) => this.changeInput('LeaveArrive', $event.target.value)} checked={LeaveArrive === "Leave"}/>
-                    <Form.Check custom inline type="radio" name="LeaveArrive" label="Arrive" value="Arrive" id="custom-checkbox-2" onChange={($event) => this.changeInput('LeaveArrive', $event.target.value)} checked={LeaveArrive === "Active"}/>
+                    <Form.Check custom inline type="radio" name="Walk" label="Quick" value="Quick" id="custom-checkbox-1" onChange={($event) => this.changeInput('Walk', $event.target.value)} checked={Walk === "Quick"}/>
+                    <Form.Check custom inline type="radio" name="Walk" label="Normal" value="Normal" id="custom-checkbox-2" onChange={($event) => this.changeInput('Walk', $event.target.value)} checked={Walk === "Normal"}/>
                   </div>
                 </Form.Group>
                 <Form.Group>

@@ -54,6 +54,8 @@ import API from '../api/api';
       timeInfo: [],
       tripInfo: [],
       completeInfo: [],
+      optimize: "optimize",
+      maxWalkDistance: "5"
     }
   }
 
@@ -72,6 +74,8 @@ import API from '../api/api';
       startTime: `${this.state.tripHour}:${this.state.tripMinute}${this.state.tripAMPM}`,
       startDate: `${this.state.tripMonth}-${this.state.tripDay}-${this.state.tripYear}`,
       arriveBy: this.state.LeaveArrive === 'Leave' ? 'false' : 'true',
+      optimize: this.state.optimize === 'QUICK' ? 'false' : 'true',
+      maxWalkDistance: `${this.state.maxWalkDistance}`
     }
 
     let response = await API.getTripInfo(query);
@@ -97,7 +101,7 @@ import API from '../api/api';
       slidesToShow: 1,
       slidesToScroll: 1   
     }
-    let { carouselImages, months, Origin, Destination, LeaveArrive, tripYear, tripMonth, tripDay, tripHour, tripMinute, tripAMPM} = this.state;
+    let { carouselImages, months, Origin, Destination, LeaveArrive, tripYear, tripMonth, tripDay, tripHour, tripMinute, tripAMPM, optimize, maxWalkDistance} = this.state;
     return (
       <React.Fragment>
         <Header/>
@@ -133,6 +137,18 @@ import API from '../api/api';
                     <Form.Check custom inline type="radio" name="LeaveArrive" label="Arrive" value="Arrive" id="custom-checkbox-2" onChange={($event) => this.changeInput('LeaveArrive', $event.target.value)} checked={LeaveArrive === "Arrive"}/>
                   </div>
                 </Form.Group>
+                <Form.Group>
+                  <div className="custom-inline-checkbox2 text-center">
+                    <Form.Check custom inline type="radio" name="optimize" label="QUICK" value="QUICK" id="custom-checkbox-3" onChange={($event) => this.changeInput('optimize', $event.target.value)} checked={optimize === "QUICK"}/>
+                    <Form.Check custom inline type="radio" name="optimize" label="TRANSFERS" value="TRANSFERS" id="custom-checkbox-4" onChange={($event) => this.changeInput('optimize', $event.target.value)} checked={optimize === "TRANSFERS"}/>
+                  </div>
+                  </Form.Group>
+                  <Form.Label>Max Walk Distance:</Form.Label>
+                  <InputGroup>
+                  <Form.Control as="select" name="maxWalkDistance" value={maxWalkDistance} onChange={($event) => this.changeInput('maxWalkDistance', $event.target.value)}>
+                      {[...Array(12)].map((hour, idx) => <option value={idx+1} key={idx}>{idx < 9 ? '0' + (idx + 1) : idx + 1}</option>)}
+                    </Form.Control>
+                  </InputGroup>
                 <Form.Group>
                   <Form.Label>Date:</Form.Label>
                   <InputGroup>
@@ -179,6 +195,8 @@ import API from '../api/api';
     )
   }
 }
+
+
 
 export default withRouter(TripForm);
 
