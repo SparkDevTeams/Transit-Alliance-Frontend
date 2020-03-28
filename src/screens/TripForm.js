@@ -199,4 +199,3 @@ import API from '../api/api';
 
 
 export default withRouter(TripForm);
-
