@@ -1,10 +1,10 @@
 import React from "react";
 import { Map, Marker, Popup, TileLayer, Polyline, Circle } from "react-leaflet";
-import {Accordion, Card, Navbar, Nav, NavDropdown, Form, FormControl, Button} from "react-bootstrap"
+import {Accordion, Card} from "react-bootstrap"
 import { withRouter, Redirect } from "react-router-dom";
 import { Sidebar, Tab } from "react-leaflet-sidetabs";
-import {FiChevronRight, FiSettings} from "react-icons/fi";
-import {FaWalking, FaBusAlt, FaClock, FaRoute} from "react-icons/fa";
+import {FiChevronRight} from "react-icons/fi";
+import {FaBusAlt, FaClock, FaHome} from "react-icons/fa";
 import "../api/api";
 
 class Maps extends React.Component {
@@ -84,9 +84,9 @@ class Maps extends React.Component {
     var position = [25.8, -80.3];
     var zoomLevel = 12;
 
-    /*if (!this.state.newInfo && !this.props.location.state){
+    if (!this.state.newInfo && !this.props.location.state){
       return <Redirect to="/"></Redirect>;
-    } */
+    } 
 
     return (
       <div>
@@ -99,29 +99,21 @@ class Maps extends React.Component {
           onOpen={this.onOpen.bind(this)}
           onClose={this.onClose.bind(this)}
         >
-          <Tab id="walk" header="Walk/Bus" icon={<FaBusAlt />}>
+          <Tab id="walk" header="Home" icon={<FaHome />}>
             <p>{this.state.currentStep}</p>
             <input type="range" onChange={(e) => this.setState({currentStep : e.target.value})}/>
             {this.state.newInfo?.legInfo?.map((info, idx) => (
               <Accordion defaultActiveKey="1">
-              <Card>
-              <Accordion.Toggle as={Card.Header} eventKey="0">
-              <p>via {info.departurePlace} </p>
-              </Accordion.Toggle>
-              <Accordion.Collapse eventKey="0">
-                <Card.Body>
-                  <p>Current Leg: {info.currentLeg}</p>
-                  <p>Transit Mode: <FaWalking /> {info.transitMode}</p>
-                  <p>Leg Duration: {info.legDuration}</p>
-                  <p>Route: {info.route}</p>
-                  <p>Route ID: {info.routeID}</p>
-                  <p>Route Color: {info.routeColor}</p>
-                  <p>Departure Place: {info.departurePlace}</p>
-                  <p>Departure Time: <FaClock /> {info.departureTime}</p>
-                  <p>Arrival Place: {info.arrivalPlace}</p>
-                  <p>Arrival Time: {info.arrivalTime}</p>
-                </Card.Body>
-              </Accordion.Collapse>
+                <Card>
+                <Accordion.Toggle as={Card.Header} eventKey="0">
+                <p>via {info.departurePlace} </p>
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    <p><FaBusAlt/>  Depart from {info.departurePlace}</p>
+                    <p><FaClock />  Estimated duration: {info.arrivalTime - info.departureTime} minutes</p>
+                  </Card.Body>
+                </Accordion.Collapse>
               </Card>
             </Accordion>
             ))}
