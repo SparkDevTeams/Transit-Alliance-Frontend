@@ -132,7 +132,7 @@ class Maps extends React.Component {
           </Tab>
         </Sidebar>
 
-        <Map center={position} zoom={zoomLevel}>
+        <Map center={position} zoom={zoomLevel} ref={"mapRef"}>
           {/*Adds a border around the Polyline */}
           {this.state.newInfo?.legInfo?.map((info, idx) => (
             <>
