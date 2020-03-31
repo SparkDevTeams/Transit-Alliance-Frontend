@@ -1,36 +1,26 @@
 {
   "files": {
-    "main.css": "/Transit-Alliance-Frontend/static/css/main.7f435a0c.chunk.css",
-    "main.js": "/Transit-Alliance-Frontend/static/js/main.7a2b1793.chunk.js",
-    "main.js.map": "/Transit-Alliance-Frontend/static/js/main.7a2b1793.chunk.js.map",
+    "main.css": "/Transit-Alliance-Frontend/static/css/main.cffdacfa.chunk.css",
+    "main.js": "/Transit-Alliance-Frontend/static/js/main.28be561c.chunk.js",
+    "main.js.map": "/Transit-Alliance-Frontend/static/js/main.28be561c.chunk.js.map",
     "runtime-main.js": "/Transit-Alliance-Frontend/static/js/runtime-main.32872320.js",
     "runtime-main.js.map": "/Transit-Alliance-Frontend/static/js/runtime-main.32872320.js.map",
     "static/css/2.cadd62b9.chunk.css": "/Transit-Alliance-Frontend/static/css/2.cadd62b9.chunk.css",
-    "static/js/2.81738ce6.chunk.js": "/Transit-Alliance-Frontend/static/js/2.81738ce6.chunk.js",
-    "static/js/2.81738ce6.chunk.js.map": "/Transit-Alliance-Frontend/static/js/2.81738ce6.chunk.js.map",
+    "static/js/2.e256824f.chunk.js": "/Transit-Alliance-Frontend/static/js/2.e256824f.chunk.js",
+    "static/js/2.e256824f.chunk.js.map": "/Transit-Alliance-Frontend/static/js/2.e256824f.chunk.js.map",
     "index.html": "/Transit-Alliance-Frontend/index.html",
-    "precache-manifest.00f8f1795997bb4f2ac706e1a6f58c8a.js": "/Transit-Alliance-Frontend/precache-manifest.00f8f1795997bb4f2ac706e1a6f58c8a.js",
+    "precache-manifest.2450e90ec7563d9bb7d92d0f6d59043d.js": "/Transit-Alliance-Frontend/precache-manifest.2450e90ec7563d9bb7d92d0f6d59043d.js",
     "service-worker.js": "/Transit-Alliance-Frontend/service-worker.js",
     "static/css/2.cadd62b9.chunk.css.map": "/Transit-Alliance-Frontend/static/css/2.cadd62b9.chunk.css.map",
-    "static/css/main.7f435a0c.chunk.css.map": "/Transit-Alliance-Frontend/static/css/main.7f435a0c.chunk.css.map",
-    "static/js/2.81738ce6.chunk.js.LICENSE.txt": "/Transit-Alliance-Frontend/static/js/2.81738ce6.chunk.js.LICENSE.txt",
-    "static/media/bus-1.jpg": "/Transit-Alliance-Frontend/static/media/bus-1.81539b7e.jpg",
-    "static/media/bus-2.jpg": "/Transit-Alliance-Frontend/static/media/bus-2.1de8e011.jpg",
-    "static/media/bus-3.jpg": "/Transit-Alliance-Frontend/static/media/bus-3.c50e6d47.jpg",
-    "static/media/bus-a.jpg": "/Transit-Alliance-Frontend/static/media/bus-a.d7547632.jpg",
-    "static/media/bus-b.jpg": "/Transit-Alliance-Frontend/static/media/bus-b.7b742d62.jpg",
-    "static/media/bus-c.jpg": "/Transit-Alliance-Frontend/static/media/bus-c.dbe4d4ca.jpg",
-    "static/media/metromover-station.jpg": "/Transit-Alliance-Frontend/static/media/metromover-station.b20db39a.jpg",
-    "static/media/mlogo.png": "/Transit-Alliance-Frontend/static/media/mlogo.619513c4.png",
-    "static/media/public-works.jpg": "/Transit-Alliance-Frontend/static/media/public-works.ab3c28d9.jpg",
-    "static/media/slick-theme.css": "/Transit-Alliance-Frontend/static/media/slick.f97e3bbf.svg",
-    "static/media/sts.jpg": "/Transit-Alliance-Frontend/static/media/sts.db964d37.jpg"
+    "static/css/main.cffdacfa.chunk.css.map": "/Transit-Alliance-Frontend/static/css/main.cffdacfa.chunk.css.map",
+    "static/js/2.e256824f.chunk.js.LICENSE.txt": "/Transit-Alliance-Frontend/static/js/2.e256824f.chunk.js.LICENSE.txt",
+    "static/media/slick-theme.css": "/Transit-Alliance-Frontend/static/media/slick.f97e3bbf.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.32872320.js",
     "static/css/2.cadd62b9.chunk.css",
-    "static/js/2.81738ce6.chunk.js",
-    "static/css/main.7f435a0c.chunk.css",
-    "static/js/main.7a2b1793.chunk.js"
+    "static/js/2.e256824f.chunk.js",
+    "static/css/main.cffdacfa.chunk.css",
+    "static/js/main.28be561c.chunk.js"
   ]
 }
