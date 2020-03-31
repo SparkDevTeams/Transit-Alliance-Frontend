@@ -1,10 +1,18 @@
 import React from "react";
 import { Map, Marker, Popup, TileLayer, Polyline, Circle } from "react-leaflet";
-import {Accordion, Card} from "react-bootstrap"
+import { Accordion, Card } from "react-bootstrap";
 import { withRouter, Redirect } from "react-router-dom";
 import { Sidebar, Tab } from "react-leaflet-sidetabs";
-import {FiChevronRight} from "react-icons/fi";
-import {FaWalking, FaBusAlt, FaClock, FaRoute, FaBus, FaHome} from "react-icons/fa";
+import { FiChevronRight } from "react-icons/fi";
+import {
+  FaWalking,
+  FaBusAlt,
+  FaClock,
+  FaRoute,
+  FaBus,
+  FaHome
+} from "react-icons/fa";
+import Slider from "../components/Slider/Slider";
 import "../api/api";
 
 class Maps extends React.Component {
@@ -27,10 +35,27 @@ class Maps extends React.Component {
     });
   }
 
-  componentDidMount(){
-    this.setState({newInfo: this.props.location.state?.newInfo, oldInfo: this.props.location.state?.oldInfo}, () => (console.log(this.state)));
+  componentDidMount() {
+    this.setState(
+      {
+        newInfo: this.props.location.state?.newInfo,
+        oldInfo: this.props.location.state?.oldInfo
+      },
+      () => console.log(this.state)
+    );
   }
-  
+
+  createStepText = () => {
+    let step = this.state.oldInfo?.legInfo?.[this.state.currentStep];
+    return (
+      <p>
+        {step?.departurePlace} <FiChevronRight />{" "}
+        {step?.transitMode === "WALK" ? <FaWalking /> : <FaBus />}{" "}
+        <FiChevronRight /> {step?.arrivalPlace}
+      </p>
+    );
+  };
+
   render() {
     var colorArray = [
       "#FF6633",
@@ -84,9 +109,9 @@ class Maps extends React.Component {
     var position = [25.8, -80.3];
     var zoomLevel = 12;
 
-    if (!this.state.newInfo && !this.props.location.state){
+    if (!this.state.newInfo && !this.props.location.state) {
       return <Redirect to="/"></Redirect>;
-    } 
+    }
 
     return (
       <div>
@@ -100,35 +125,33 @@ class Maps extends React.Component {
           onClose={this.onClose.bind(this)}
         >
           <Tab id="walk" header="Home" icon={<FaHome />}>
-
-          <p>{this.state.currentStep}</p>
-            <p>
-              {this.state.newInfo?.time?.transitModes[this.state.currentStep - 1] == "WALK" ? ( <FaWalking />)  : ( <FaBus />)}
-              {this.state.newInfo?.time?.transitModes[this.state.currentStep - 1] == "WALK" ? " Walk to "  : ( " Transfer to ")}
-            </p>
-            {this.state.newInfo?.legInfo?.map((info, idx) => (
-              <>
-              <p>{(info.currentLeg) == (this.state.currentStep) ? info.arrivalPlace : undefined}</p>
-              <p>{(info.currentLeg) == (this.state.currentStep) ? "Arive by: " + info.arrivalTime : undefined}</p>
-              </>
-            ))}
-            <input type="range" onChange={(e) => this.setState({currentStep : e.target.value})} min="1" max={this.state.newInfo?.time?.transitModes.length} />
-            
-            {this.state.newInfo?.legInfo?.map((info, idx) => (
-              <Accordion defaultActiveKey="1">
-                <Card>
-                <Accordion.Toggle as={Card.Header} eventKey="0">
-                <p>via {info.departurePlace} </p>
-                </Accordion.Toggle>
-                <Accordion.Collapse eventKey="0">
-                  <Card.Body>
-                    <p><FaBusAlt/>  Depart from {info.departurePlace}</p>
-                    <p><FaClock />  Estimated duration: {info.arrivalTime - info.departureTime} minutes</p>
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
-            ))}
+            <>
+              <Slider
+                step={this.state.oldInfo?.legInfo?.[this.state.currentStep]}
+                length={this.state.oldInfo?.legInfo?.length}
+                setStep={value => this.setState({ currentStep: value })}
+              />
+              {this.state.oldInfo?.legInfo?.map((info, idx) => (
+                <Accordion activeKey={`${this.state.currentStep}`}>
+                  <Card>
+                    <Accordion.Toggle as={Card.Header} eventKey={`${idx}`}>
+                      <p>via {info.departurePlace}</p>
+                    </Accordion.Toggle>
+                    <Accordion.Collapse eventKey={`${idx}`}>
+                      <Card.Body>
+                        <p>
+                          <FaBusAlt /> Depart from {info.departurePlace}
+                        </p>
+                        <p>
+                          <FaClock /> Estimated duration:{" "}
+                          {info.arrivalTime - info.departureTime} minutes
+                        </p>
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                </Accordion>
+              ))}
+            </>
           </Tab>
         </Sidebar>
 
@@ -145,9 +168,7 @@ class Maps extends React.Component {
               <Polyline
                 positions={info.legPolyline}
                 color={
-                  info.transitMode === "BUS"
-                    ? "#" + info.routeColor
-                    : "blue"
+                  info.transitMode === "BUS" ? "#" + info.routeColor : "blue"
                 }
                 dashArray={info.transitMode === "WALK" ? "1,10" : undefined}
                 weight={info.transitMode === "BUS" ? 8 : 5}
@@ -170,7 +191,11 @@ class Maps extends React.Component {
                   />
                 </>
               )}
-              {idx === this.state.newInfo?.time.transitModes.length - 1 ? <Marker position={info.legPolyline[info.legPolyline.length - 1]}/> : null}
+              {idx === this.state.newInfo?.time.transitModes.length - 1 ? (
+                <Marker
+                  position={info.legPolyline[info.legPolyline.length - 1]}
+                />
+              ) : null}
             </>
           ))}
 
@@ -184,16 +209,12 @@ class Maps extends React.Component {
               />
               <Polyline
                 positions={info.legPolyline}
-                color={
-                  info.transitMode === "BUS"
-                    ? colorArray["grey"]
-                    : "grey"
-                }
+                color={info.transitMode === "BUS" ? colorArray["grey"] : "grey"}
                 dashArray={info.transitMode === "WALK" ? "1,10" : undefined}
                 weight={info.transitMode === "BUS" ? 8 : 5}
               />
-              </>
-              ))}
+            </>
+          ))}
           {/*this.props.location.state?.newInfo?.completePolyline.map(line => <Polyline positions={line} color={colorArray[Math.floor(Math.random() * colorArray.length)]}/>)*/}
           {/* <Polyline positions={this.props.location.state.newInfo.completePolyline} /> */}
           <TileLayer
