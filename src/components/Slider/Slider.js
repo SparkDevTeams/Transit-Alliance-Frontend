@@ -4,7 +4,7 @@ import { FaWalking, FaBus } from "react-icons/fa";
 import './styles.css'
 
 const Slider = props => {
-  const {step, length, setStep} = props;
+  const {step, length, setStep, currentStep = 0} = props;
   return (
     <>
       <p>
@@ -18,6 +18,7 @@ const Slider = props => {
         onChange={e => setStep(e.target.value)}
         min="0"
         max={length? length - 1 : 0}
+        value={currentStep}
       />
     </>
   );
