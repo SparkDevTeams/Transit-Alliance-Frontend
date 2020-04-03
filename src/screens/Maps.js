@@ -15,7 +15,8 @@ import {
 import Slider from "../components/Slider/Slider";
 import "../api/api";
 
-class Maps extends React.Component {
+class Maps extends React.Component 
+{
   constructor(props) {
     super(props);
     this.state = {
@@ -131,10 +132,13 @@ class Maps extends React.Component {
                 length={this.state.oldInfo?.legInfo?.length}
                 setStep={value => this.setState({ currentStep: value })}
               />
-              {this.state.oldInfo?.legInfo?.map((info, idx) => (
+              
+              {this.state.newInfo?.legInfo?.map((info, idx) => (
+                <>
                 <Accordion activeKey={`${this.state.currentStep}`}>
                   <Card>
                     <Accordion.Toggle as={Card.Header} eventKey={`${idx}`}>
+                      {/*(info.currentLeg) == (this.state.currentStep) ? () => {this.refs.mapRef.leafletElement.panTo([info.legPolyline[0]])} : undefined*/}
                       <p>via {info.departurePlace}</p>
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey={`${idx}`}>
@@ -150,12 +154,32 @@ class Maps extends React.Component {
                     </Accordion.Collapse>
                   </Card>
                 </Accordion>
+                </>
               ))}
             </>
           </Tab>
         </Sidebar>
 
         <Map center={position} zoom={zoomLevel} ref={"mapRef"}>
+        {this.state.oldInfo?.legInfo?.map((info, idx) => (
+            <>
+              <Polyline
+                positions={info.legPolyline}
+                color={"black"}
+                dashArray={info.transitMode === "WALK" ? "1,10" : undefined}
+                weight={info.transitMode === "BUS" ? 9 : 6}
+                opacity={.4}
+              />
+              <Polyline
+                positions={info.legPolyline}
+                color={info.transitMode === "BUS" ? "grey" : "grey"}
+                dashArray={info.transitMode === "WALK" ? "1,10" : undefined}
+                weight={info.transitMode === "BUS" ? 8 : 5}
+                opacity={.6}
+              />
+            </>
+          ))}
+          
           {/*Adds a border around the Polyline */}
           {this.state.newInfo?.legInfo?.map((info, idx) => (
             <>
@@ -179,15 +203,17 @@ class Maps extends React.Component {
                     center={info.legPolyline[0]}
                     radius={20}
                     color={"black"}
-                    weight={9}
+                    weight={18}
+                    onClick={() => {this.refs.mapRef.leafletElement.panTo(info.legPolyline[0])}}
                   />
                   <Circle
                     center={info.legPolyline[0]}
                     radius={20}
                     fillColor={"lightgrey"}
                     fillOpacity={1}
-                    weight={2}
+                    weight={12}
                     color={"grey"}
+                    onClick={() => {this.refs.mapRef.leafletElement.panTo(info.legPolyline[0])}}
                   />
                 </>
               )}
@@ -199,22 +225,7 @@ class Maps extends React.Component {
             </>
           ))}
 
-          {this.state.oldInfo?.legInfo?.map((info, idx) => (
-            <>
-              <Polyline
-                positions={info.legPolyline}
-                color={"black"}
-                dashArray={info.transitMode === "WALK" ? "1,10" : undefined}
-                weight={info.transitMode === "BUS" ? 9 : 6}
-              />
-              <Polyline
-                positions={info.legPolyline}
-                color={info.transitMode === "BUS" ? colorArray["grey"] : "grey"}
-                dashArray={info.transitMode === "WALK" ? "1,10" : undefined}
-                weight={info.transitMode === "BUS" ? 8 : 5}
-              />
-            </>
-          ))}
+         
           {/*this.props.location.state?.newInfo?.completePolyline.map(line => <Polyline positions={line} color={colorArray[Math.floor(Math.random() * colorArray.length)]}/>)*/}
           {/* <Polyline positions={this.props.location.state.newInfo.completePolyline} /> */}
           <TileLayer
