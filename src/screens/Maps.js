@@ -86,7 +86,7 @@ const Maps = (props) =>
                         </p>
                         <p>
                           <FaClock /> Estimated duration:{" "}
-                          {info.arrivalTime - info.departureTime} minutes
+                            {((info.arrivalTime - info.departureTime) / 1000) / 60} minutes
                         </p>
                       </Card.Body>
                     </Accordion.Collapse>
@@ -114,7 +114,11 @@ const Maps = (props) =>
                 dashArray={info.transitMode === "WALK" ? "1,10" : undefined}
                 weight={info.transitMode === "BUS" ? 8 : 5}
                 opacity={.6}
-              />
+              >
+                <Popup>
+                      <FaBusAlt/> {((info.arrivalTime - info.departureTime) / 1000) / 60} minutes
+                </Popup>
+              </Polyline>
             </>
           ))}
           
