@@ -149,10 +149,14 @@ const Maps = (props) =>
                     radius={20}
                     fillColor={"lightgrey"}
                     fillOpacity={1}
-                    weight={12}
+                    weight={16}
                     color={"grey"}
-                    onClick={() => setCurrentStep(idx)}
-                  />
+                    onClick={() => setCurrentStep(idx) }
+                  >
+                    {/* <Popup>
+                      <FaBusAlt/> {info.departurePlace}
+                    </Popup> */}
+                  </Circle>
                 </>
               )}
               {idx === newInfo?.time.transitModes.length - 1 ? (

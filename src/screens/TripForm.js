@@ -14,6 +14,8 @@ import {FaLocationArrow, FaCrosshairs} from "react-icons/fa";
 
  class TripForm extends React.Component {
   constructor(props) {
+    var today = new Date();
+
     super(props);
     this.state = {
       carouselImages: [
@@ -39,17 +41,17 @@ import {FaLocationArrow, FaCrosshairs} from "react-icons/fa";
       Origin: "",
       Destination: "",
       LeaveArrive: "Leave",
-      tripMonth: "1",
-      tripDay: "1",
-      tripYear: "2020",
-      tripHour: "1",
-      tripMinute: "1",
-      tripAMPM: "am",
+      tripMonth: today.getMonth(),
+      tripDay: today.getDate(),
+      tripYear: today.getFullYear(),
+      tripHour: today.getHours(),
+      tripMinute: today.getMinutes(),
+      tripAMPM: today.getTime(),
       timeInfo: [],
       tripInfo: [],
       completeInfo: [],
       optimize: "QUICK",
-      maxWalkDistance: "5"
+      maxWalkDistance: "1"
     }
   }
   state = {
