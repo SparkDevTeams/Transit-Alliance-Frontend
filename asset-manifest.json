@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/Transit-Alliance-Frontend/static/css/main.cffdacfa.chunk.css",
-    "main.js": "/Transit-Alliance-Frontend/static/js/main.45366594.chunk.js",
-    "main.js.map": "/Transit-Alliance-Frontend/static/js/main.45366594.chunk.js.map",
+    "main.css": "/Transit-Alliance-Frontend/static/css/main.e23668a7.chunk.css",
+    "main.js": "/Transit-Alliance-Frontend/static/js/main.808b4b4d.chunk.js",
+    "main.js.map": "/Transit-Alliance-Frontend/static/js/main.808b4b4d.chunk.js.map",
     "runtime-main.js": "/Transit-Alliance-Frontend/static/js/runtime-main.32872320.js",
     "runtime-main.js.map": "/Transit-Alliance-Frontend/static/js/runtime-main.32872320.js.map",
     "static/css/2.cadd62b9.chunk.css": "/Transit-Alliance-Frontend/static/css/2.cadd62b9.chunk.css",
-    "static/js/2.256b82e1.chunk.js": "/Transit-Alliance-Frontend/static/js/2.256b82e1.chunk.js",
-    "static/js/2.256b82e1.chunk.js.map": "/Transit-Alliance-Frontend/static/js/2.256b82e1.chunk.js.map",
+    "static/js/2.9e49d30a.chunk.js": "/Transit-Alliance-Frontend/static/js/2.9e49d30a.chunk.js",
+    "static/js/2.9e49d30a.chunk.js.map": "/Transit-Alliance-Frontend/static/js/2.9e49d30a.chunk.js.map",
     "index.html": "/Transit-Alliance-Frontend/index.html",
-    "precache-manifest.fadbcf0fe59437c6906350b27c595f04.js": "/Transit-Alliance-Frontend/precache-manifest.fadbcf0fe59437c6906350b27c595f04.js",
+    "precache-manifest.cd45ac05e649c4ead643ed3655b28c33.js": "/Transit-Alliance-Frontend/precache-manifest.cd45ac05e649c4ead643ed3655b28c33.js",
     "service-worker.js": "/Transit-Alliance-Frontend/service-worker.js",
     "static/css/2.cadd62b9.chunk.css.map": "/Transit-Alliance-Frontend/static/css/2.cadd62b9.chunk.css.map",
-    "static/css/main.cffdacfa.chunk.css.map": "/Transit-Alliance-Frontend/static/css/main.cffdacfa.chunk.css.map",
-    "static/js/2.256b82e1.chunk.js.LICENSE.txt": "/Transit-Alliance-Frontend/static/js/2.256b82e1.chunk.js.LICENSE.txt",
+    "static/css/main.e23668a7.chunk.css.map": "/Transit-Alliance-Frontend/static/css/main.e23668a7.chunk.css.map",
+    "static/js/2.9e49d30a.chunk.js.LICENSE.txt": "/Transit-Alliance-Frontend/static/js/2.9e49d30a.chunk.js.LICENSE.txt",
     "static/media/slick-theme.css": "/Transit-Alliance-Frontend/static/media/slick.f97e3bbf.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.32872320.js",
     "static/css/2.cadd62b9.chunk.css",
-    "static/js/2.256b82e1.chunk.js",
-    "static/css/main.cffdacfa.chunk.css",
-    "static/js/main.45366594.chunk.js"
+    "static/js/2.9e49d30a.chunk.js",
+    "static/css/main.e23668a7.chunk.css",
+    "static/js/main.808b4b4d.chunk.js"
   ]
 }
