@@ -72,8 +72,15 @@ const Maps = (props) =>
                 currentStep={currentStep}
               />
               
+              <p>Arrive at {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].departureTime)).getHours()}:
+                {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].departureTime)).getMinutes() < 10 ? '0' : ''}
+                {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].departureTime)).getMinutes()}
+                {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].departureTime)).getHours() >= 12 ? " PM" : " AM"} 
+              </p>
+              
               {newInfo?.legInfo?.map((info, idx) => (
                 <>
+                  {info.departureTime}
                 <Accordion activeKey={`${currentStep}`}>
                   <Card>
                     <Accordion.Toggle as={Card.Header} eventKey={`${idx}`}>
@@ -100,7 +107,7 @@ const Maps = (props) =>
 
         <Map center={position} zoom={zoomLevel} ref={mapRef}>
         {oldInfo?.legInfo?.map((info, idx) => (
-            <>
+          <>
               <Polyline
                 positions={info.legPolyline}
                 color={"black"}
