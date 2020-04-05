@@ -70,10 +70,12 @@ body {
 }
 .custom-inline-checkbox
 {
+  padding-top: 10px;
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
+  color: #77DD55;
 }
 .custom-inline-checkbox2
 {
@@ -81,6 +83,7 @@ body {
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
+  color: #77DD55;
 }
 .custom-control-label::before,
 .custom-control-label::after {
