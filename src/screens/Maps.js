@@ -80,7 +80,6 @@ const Maps = (props) =>
               
               {newInfo?.legInfo?.map((info, idx) => (
                 <>
-                  {info.departureTime}
                 <Accordion activeKey={`${currentStep}`}>
                   <Card>
                     <Accordion.Toggle as={Card.Header} eventKey={`${idx}`}>
