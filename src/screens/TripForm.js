@@ -9,7 +9,7 @@ import {Link, withRouter} from 'react-router-dom';
 import API from '../api/api';
 import {Container, Row, Col, Collapse } from 'react-bootstrap';
 import {} from "react-icons/fa";
-import {FaLocationArrow, FaCrosshairs} from "react-icons/fa";
+import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
 
 
  class TripForm extends React.Component {
@@ -46,7 +46,7 @@ import {FaLocationArrow, FaCrosshairs} from "react-icons/fa";
       tripYear: today.getFullYear(),
       tripHour: today.getHours() > 12 ? today.getHours() - 12 : today.getHours(),
       tripMinute: today.getMinutes(),
-      tripAMPM: today.getHours() >= 12 ? "pm" : "am",
+      tripAMPM: today.getHours() >= 12 ? "PM" : "AM",
       timeInfo: [],
       tripInfo: [],
       completeInfo: [],
@@ -93,6 +93,7 @@ import {FaLocationArrow, FaCrosshairs} from "react-icons/fa";
     );
   }
 
+  
 
   render() {
     let settings = {
@@ -149,30 +150,30 @@ import {FaLocationArrow, FaCrosshairs} from "react-icons/fa";
                   <div>
                     <span>
                       <Form.Group>
-                        <div className="custom-inline-checkbox text-center">
+                        <div className="custom-inline-checkbox">
                           <Form.Check 
                             custom inline type="radio" 
                             name="LeaveArrive" 
-                            label="Leave" 
-                            value="Leave" 
+                            label="LEAVE" 
+                            value="LEAVE" 
                             id="custom-checkbox-1" 
                             onChange={($event) => this.changeInput('LeaveArrive', $event.target.value)} 
-                            checked={LeaveArrive === "Leave"} 
+                            checked={LeaveArrive === "LEAVE"} 
                             />
                           <Form.Check 
                             custom inline type="radio" 
                             name="LeaveArrive" 
-                            label="Arrive" 
-                            value="Arrive" 
+                            label="ARRIVE" 
+                            value="ARRIVE" 
                             id="custom-checkbox-2" 
                             onChange={($event) => this.changeInput('LeaveArrive', $event.target.value)} 
-                            checked={LeaveArrive === "Arrive"} 
+                            checked={LeaveArrive === "ARRIVE"} 
                           />
                         </div>
                       </Form.Group>
 
                       <Form.Group>
-                        <div className="custom-inline-checkbox2 text-center">
+                        <div className="custom-inline-checkbox2">
                           <Form.Check 
                             custom inline type="radio" 
                             name="optimize" 
@@ -210,7 +211,7 @@ import {FaLocationArrow, FaCrosshairs} from "react-icons/fa";
                           </Form.Control>
                         </InputGroup>
                       </Form.Group>
-
+                      
                       <Form.Group>
                         <Form.Label>Date:</Form.Label>
                         <InputGroup>
