@@ -14,7 +14,6 @@ import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
 
  class TripForm extends React.Component {
   constructor(props) {
-    var today = new Date();
 
     super(props);
     this.state = {
@@ -23,21 +22,6 @@ import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
         'bus-b.jpg'
       ],
 
-      months: 
-      [
-        {label: "January", value: 1}, 
-        {label: "February", value: 2}, 
-        {label: "March", value: 3}, 
-        {label: "April", value: 4}, 
-        {label: "May", value: 5}, 
-        {label: "June", value: 6}, 
-        {label: "July", value: 7}, 
-        {label: "August", value: 8}, 
-        {label: "September", value: 9}, 
-        {label: "October", value: 10}, 
-        {label: "November", value: 11}, 
-        {label: "December", value: 12}
-      ],
       Origin: "",
       Destination: "",
       LeaveArrive: "Leave",
@@ -212,44 +196,17 @@ import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
                         </InputGroup>
                       </Form.Group>
                       
-                      <Form.Group>
-                        <Form.Label>Date:</Form.Label>
-                        <InputGroup>
-                          <Form.Control 
-                            as="select" 
-                            name="tripMonth" 
-                            value={tripMonth} 
-                            onChange={($event) => this.changeInput('tripMonth', $event.target.value)}>
-                              {months.map((month, idx) => 
-                                <option 
-                                  value={month.value} 
-                                  key={idx}>{month.label}
-                                </option>)}
-                          </Form.Control>
-                          <Form.Control 
-                            as="select" 
-                            name="tripDay" 
-                            value={tripDay} 
-                            onChange={($event) => this.changeInput('tripDay', $event.target.value)}>
-                              {[...Array(31)].map((date, idx) => 
-                                <option value={idx + 1} key={idx}>
-                                  {idx < 9 ? '0' + (idx + 1) : idx + 1}
-                                </option>)}
-                          </Form.Control>
-                          <Form.Control 
-                            as="select" 
-                            name="tripYear" 
-                            value={tripYear} 
-                            onChange={($event) => this.changeInput('tripYear', $event.target.value)}>
-                              <option value="2020">2020</option>
-                              <option value="2021">2021</option>
-                              <option value="2022">2022</option>
-                              <option value="2023">2023</option>
-                              <option value="2024">2024</option>
-                          </Form.Control>
-                        </InputGroup>
-                      </Form.Group>
-                      
+                      <DatePicker
+                      selected={this.state.startDate}
+                      onChange={this.handleChange}
+                      showTimeSelect
+                      timeFormat="HH:mm"
+                      timeIntervals={15}
+                      timeCaption="time"
+                      dateFormat="MMMM d, yyyy h:mm aa"
+                      />
+                    
+
                       <Form.Group>
                         <Form.Label>Time:</Form.Label>
                         <InputGroup>
