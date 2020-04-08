@@ -216,40 +216,6 @@ import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
                       dateFormat="MMMM d, yyyy h:mm aa"
                       />
                     
-
-                      <Form.Group>
-                        <Form.Label>Time:</Form.Label>
-                        <InputGroup>
-                          <Form.Control 
-                            as="select" 
-                            name="tripHour" 
-                            value={tripHour} 
-                            onChange={($event) => this.changeInput('tripHour', $event.target.value)}>
-                              {[...Array(12)].map((hour, idx) => 
-                                <option value={idx + 1} key={idx}>
-                                  {idx < 9 ? '0' + (idx + 1) : idx + 1}
-                                </option>)}
-                          </Form.Control>
-                          <Form.Control 
-                            as="select" 
-                            name="tripMinute" 
-                            value={tripMinute} 
-                            onChange={($event) => this.changeInput('tripMinute', $event.target.value)}>
-                              {[...Array(60)].map((minute, idx) => 
-                                <option value={idx + 1} key={idx}>
-                                  {idx < 9 ? '0' + (idx + 1) : idx + 1}
-                                </option>)}
-                          </Form.Control>
-                          <Form.Control 
-                            as="select" 
-                            name="tripAMPM" 
-                            value={tripAMPM} 
-                            onChange={($event) => this.changeInput('tripAMPM', $event.target.value)}>
-                              <option value="am">AM</option>
-                              <option value="pm">PM</option>
-                          </Form.Control>
-                        </InputGroup>
-                      </Form.Group>
                     </span>
                   </div>
                 </Collapse>
