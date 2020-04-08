@@ -22,7 +22,7 @@ import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
         'bus-a.jpg',
         'bus-b.jpg'
       ],
-      
+
       months: 
       [
         {label: "January", value: 1}, 
