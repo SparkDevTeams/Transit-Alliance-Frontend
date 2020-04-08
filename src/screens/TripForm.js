@@ -10,6 +10,8 @@ import API from '../api/api';
 import {Container, Row, Col, Collapse } from 'react-bootstrap';
 import {} from "react-icons/fa";
 import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
  class TripForm extends React.Component {
@@ -25,12 +27,12 @@ import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
       Origin: "",
       Destination: "",
       LeaveArrive: "Leave",
-      tripMonth: today.getMonth(),
-      tripDay: today.getDate(),
-      tripYear: today.getFullYear(),
-      tripHour: today.getHours() > 12 ? today.getHours() - 12 : today.getHours(),
-      tripMinute: today.getMinutes(),
-      tripAMPM: today.getHours() >= 12 ? "PM" : "AM",
+      tripMonth: this.state.startDate.getMonth(),
+      tripDay: this.state.startDate.getDate(),
+      tripYear: this.state.startDate.getFullYear(),
+      tripHour: this.state.startDate.getHours() > 12 ? this.state.startDate.getHours() - 12 : this.state.startDate.getHours(),
+      tripMinute: this.state.startDate.getMinutes(),
+      tripAMPM: this.state.startDate.getHours() >= 12 ? "PM" : "AM",
       timeInfo: [],
       tripInfo: [],
       completeInfo: [],
@@ -39,7 +41,14 @@ import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
     }
   }
   state = {
-    collapseID: ""
+    collapseID: "",
+    startDate: new Date()
+   };
+   
+   handleChange = date => {
+    this.setState({
+      startDate: date
+    });
   };
 
   toggleCollapse = collapseID => () =>
