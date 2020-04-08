@@ -76,8 +76,10 @@ import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
         }
     );
   }
-
-  
+  showPosition = (position) =>
+  {
+    this.setState({['Origin']: [position.coords.latitude, position.coords.longitude]})
+  }
 
   render() {
     let settings = {
@@ -126,8 +128,16 @@ import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
                 <Button 
                   variant="outline-primary" 
                   size="sm" 
-                  onClick={() => this.setState({ showText: !this.state.showText })}>
-                    Advanced Options
+                  onClick={() => this.setState({ showText: !this.state.showText })}
+                >
+                  Advanced Options
+                </Button>
+                <Button  
+                  variant="outline-primary"  
+                  size="sm" 
+                  onClick={() => navigator.geolocation.getCurrentPosition(this.showPosition)}
+                >
+                  Locate (Needs testing)
                 </Button>
 
                 <Collapse in={this.state.showText}>
