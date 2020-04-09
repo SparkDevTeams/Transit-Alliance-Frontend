@@ -1,0 +1,44 @@
+.customDatePickerWidth, 
+.customDatePickerWidth > div.react-datepicker-wrapper, 
+.customDatePickerWidth > div > div.react-datepicker__input-container
+.customDatePickerWidth > div > div.react-datepicker__input-container input {
+   width: 100%;
+   height: 100%;
+   
+}
+.react-datepicker__input-container  {
+    
+  background: #FFFFFF;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  
+    width: inherit;
+    height: inherit;
+  }
+  .react-datepicker__input-container input {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border: 1px solid silver; 
+    width: inherit;
+    height: 100%;
+  }
+
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+
+  .react-datepicker__input-container:checked~.react-datepicker__input-label::before {
+    color: #fff;
+    border-color: #157d2d;
+    background-color: #28a745;
+  }
+  .react-datepicker__input-container:focus:not(:checked)~.react-datepicker-label::before {
+    border-color: #157d2d;
+    box-shadow: 0 0 0 0.2rem #28a74561;
+  }
+  .react-datepicker__input-container:not(:disabled):active~.react-datepicker-label::before {
+    background-color: #28a74547;
+    border-color: #28a74547;
+    
+  }

@@ -12,6 +12,7 @@ import {} from "react-icons/fa";
 import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "../components/DatePicker/customDatePickerWidth.css";
 
 
  class TripForm extends React.Component {
@@ -79,16 +80,16 @@ import "react-datepicker/dist/react-datepicker.css";
       maxWalkDistance: `${this.state.maxWalkDistance}`
     }
     console.log(query);
-    // let response = await API.getTripInfo(query);
-    // this.props.history.push(
-    //     {
-    //         pathname: '/maps', 
-    //         state : {
-    //             oldInfo: response.oldResponse, 
-    //             newInfo: response.prototypeResponse,
-    //         }
-    //     }
-    // );
+     let response = await API.getTripInfo(query);
+     this.props.history.push(
+         {
+             pathname: '/maps', 
+             state : {
+                 oldInfo: response.oldResponse, 
+                 newInfo: response.prototypeResponse,
+             }
+         }
+     );
   }
   showPosition = (position) =>
   {
@@ -219,16 +220,20 @@ import "react-datepicker/dist/react-datepicker.css";
                           </Form.Control>
                         </InputGroup>
                       </Form.Group>
-                      
-                      <DatePicker
-                      selected={this.state.startDate}
-                      onChange={this.handleChange}
-                      showTimeSelect
-                      timeFormat="HH:mm"
-                      timeIntervals={15}
-                      timeCaption="time"
-                      dateFormat="MMMM d, yyyy h:mm aa"
-                      />
+
+
+                      <p>Date and Time</p>
+                      <div className="customDatePickerWidth">
+                        <DatePicker
+                        selected={this.state.startDate}
+                        onChange={this.handleChange}
+                        showTimeSelect
+                        timeFormat="HH:mm"
+                        timeIntervals={15}
+                        timeCaption="time"
+                        dateFormat="MMMM d, yyyy h:mm aa"
+                        />
+                      </div>
                     
                     </span>
                   </div>
