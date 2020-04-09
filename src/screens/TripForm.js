@@ -289,6 +289,7 @@ import Geolookup from 'react-geolookup';
                           />
                         </div>
                       </Form.Group>
+                      
                       <Form.Group>
                         <Form.Label>Maximum Walking Distance:</Form.Label>
                         <InputGroup>
@@ -297,12 +298,9 @@ import Geolookup from 'react-geolookup';
                             name="maxWalkDistance" 
                             value={maxWalkDistance} 
                             onChange={($event) => this.changeInput('maxWalkDistance', $event.target.value)}>
-                              {[...Array(12)].map((hour, idx) => 
-                              <option 
-                                value={idx + 1} 
-                                key={idx}>
-                                  {idx < 9 ? '0' + (idx + 1) : idx + 1}
-                              </option>)}
+                              <option>.5 mi</option>
+                              <option>.75 mi</option>
+                              <option>1 mi</option>
                           </Form.Control>
                         </InputGroup>
                       </Form.Group>
