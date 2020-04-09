@@ -18,6 +18,7 @@ import "react-datepicker/dist/react-datepicker.css";
   constructor(props) {
 
     super(props);
+    const currentDate = new Date();
     this.state = {
       carouselImages: [
         'bus-a.jpg',
@@ -27,27 +28,31 @@ import "react-datepicker/dist/react-datepicker.css";
       Origin: "",
       Destination: "",
       LeaveArrive: "Leave",
-      tripMonth: this.state.startDate.getMonth(),
-      tripDay: this.state.startDate.getDate(),
-      tripYear: this.state.startDate.getFullYear(),
-      tripHour: this.state.startDate.getHours() > 12 ? this.state.startDate.getHours() - 12 : this.state.startDate.getHours(),
-      tripMinute: this.state.startDate.getMinutes(),
-      tripAMPM: this.state.startDate.getHours() >= 12 ? "PM" : "AM",
+      startDate: currentDate,
+      tripMonth: currentDate.getMonth() + 1,
+      tripDay: currentDate.getDate(),
+      tripYear: currentDate.getFullYear(),
+      tripHour: currentDate.getHours() > 12 ? currentDate - 12 : currentDate.getHours(),
+      tripMinute: currentDate.getMinutes(),
+      tripAMPM: currentDate.getHours() >= 12 ? "PM" : "AM",
       timeInfo: [],
       tripInfo: [],
       completeInfo: [],
       optimize: "QUICK",
-      maxWalkDistance: "1"
+      maxWalkDistance: "1",
+      collapseID: "",
     }
   }
-  state = {
-    collapseID: "",
-    startDate: new Date()
-   };
    
    handleChange = date => {
     this.setState({
-      startDate: date
+      startDate: date,
+      tripMonth: date.getMonth() + 1,
+      tripDay: date.getDate(),
+      tripYear: date.getFullYear(),
+      tripHour: date.getHours() > 12 ? date - 12 : date.getHours(),
+      tripMinute: date.getMinutes(),
+      tripAMPM: date.getHours() >= 12 ? "PM" : "AM",
     });
   };
 
@@ -60,30 +65,30 @@ import "react-datepicker/dist/react-datepicker.css";
       [key]: val
     })
   }
-
+  
   submitHandle = async (event) => {
     event.preventDefault();
-
+    console.log(this.state.startDate)
     let query = {
       fromPlace: this.state.Origin,
       toPlace: this.state.Destination,
       startTime: `${this.state.tripHour}:${this.state.tripMinute}${this.state.tripAMPM}`,
-      startDate: `${this.state.tripMonth}-${this.state.tripDay}-${this.state.tripYear}`,
+      startDate: `${this.state.tripMonth.toString().padStart(2, '0')}-${this.state.tripDay.toString().padStart(2, '0')}-${this.state.tripYear}`,
       arriveBy: this.state.LeaveArrive === 'Leave' ? 'false' : 'true',
       optimize: this.state.optimize,
       maxWalkDistance: `${this.state.maxWalkDistance}`
     }
-
-    let response = await API.getTripInfo(query);
-    this.props.history.push(
-        {
-            pathname: '/maps', 
-            state : {
-                oldInfo: response.oldResponse, 
-                newInfo: response.prototypeResponse,
-            }
-        }
-    );
+    console.log(query);
+    // let response = await API.getTripInfo(query);
+    // this.props.history.push(
+    //     {
+    //         pathname: '/maps', 
+    //         state : {
+    //             oldInfo: response.oldResponse, 
+    //             newInfo: response.prototypeResponse,
+    //         }
+    //     }
+    // );
   }
   showPosition = (position) =>
   {
