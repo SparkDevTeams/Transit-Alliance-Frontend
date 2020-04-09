@@ -4,15 +4,17 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../App.css'
-import { Form, InputGroup, Button } from 'react-bootstrap';
+import { Form, InputGroup, Button, ButtonToolbar } from 'react-bootstrap';
 import {Link, withRouter} from 'react-router-dom';
 import API from '../api/api';
 import {Container, Row, Col, Collapse } from 'react-bootstrap';
-import {} from "react-icons/fa";
+import { FaRandom } from "react-icons/fa";
 import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../components/DatePicker/customDatePickerWidth.css";
+import * as Nominatim from 'nominatim-browser';
+import Geolookup from 'react-geolookup';
 
 
  class TripForm extends React.Component {
@@ -93,8 +95,54 @@ import "../components/DatePicker/customDatePickerWidth.css";
   }
   showPosition = (position) =>
   {
-    this.setState({['Origin']: [position.coords.latitude, position.coords.longitude]})
+    this.setState({['Origin']: [position.coords.latitude, ' ' + position.coords.longitude]})
   }
+  switchDestinations = () =>
+  {
+    let temp = this.state.Destination;
+    let temp2 = this.state.Origin
+    this.setState({['Origin']: temp})
+    this.setState({['Destination']: temp2})
+  }
+
+  onSuggestsLookup =(userInput) =>{
+    return Nominatim.geocode({
+      q: "Miami, FL, " + userInput,
+      addressdetails: true
+    });
+  }
+
+  onGeocodeSuggest(suggest) {
+    let geocoded = {};
+    if (suggest) {
+      geocoded.nominatim = suggest.raw || {};
+      geocoded.location = {
+        lat: suggest.raw ? suggest.raw.lat : '',
+        lon: suggest.raw ? suggest.raw.lon : ''
+      };
+      geocoded.placeId = suggest.placeId;
+      geocoded.isFixture = suggest.isFixture;
+      geocoded.label = suggest.raw ? suggest.raw.display_name : '';
+    }
+    return geocoded;
+  }
+  getSuggestLabel(suggest) {
+    return suggest.display_name;
+  }
+  /**
+  * When a suggest got selected
+  * @param  {Object} suggest The suggest
+  */
+  onSuggestSelect(suggest) {
+    console.log(suggest)
+    //This doesnt work for some reason
+  this.changeInput('Origin', [suggest.location.lat,  " " + suggest.location.lon])
+  }
+  onSuggestSelect2(suggest) {
+    console.log(suggest)
+    //This doesnt work for some reason
+  this.changeInput('Destination', [suggest.location.lat,  " " + suggest.location.lon])
+}
 
   render() {
     let settings = {
@@ -108,7 +156,9 @@ import "../components/DatePicker/customDatePickerWidth.css";
     }
     let { carouselImages, Origin, Destination, LeaveArrive, optimize, maxWalkDistance} = this.state;
     return (
+      
       <React.Fragment>
+        
         <div id="classicformpage">
           <div className="form-container">
             <Form onSubmit={($event) => this.submitHandle($event)}>
@@ -116,7 +166,42 @@ import "../components/DatePicker/customDatePickerWidth.css";
                 <Form.Group>
                   <h2 className="text-center">PLAN YOUR TRIP</h2>
                 </Form.Group>
-
+                <Form.Group>
+                  <ButtonToolbar>
+                    <Button  
+                      variant="outline-primary"  
+                      size="sm" 
+                      onClick={() => navigator.geolocation.getCurrentPosition(this.showPosition)}
+                    >
+                      <FaLocationArrow />
+                    </Button>
+                      <Geolookup
+                          inputClassName="geolookup__input--nominatim"
+                          placeholder={"Ex. Florida International University"}
+                          onSuggestsLookup={this.onSuggestsLookup.bind(this)}
+                          onGeocodeSuggest={this.onGeocodeSuggest.bind(this)}
+                          onSuggestSelect={this.onSuggestSelect.bind(this)}
+                          getSuggestLabel={this.getSuggestLabel.bind(this)}/>
+                    </ButtonToolbar>
+                </Form.Group>
+                <Form.Group>
+                  <ButtonToolbar>
+                    <Button  
+                      variant="outline-secondary"  
+                      size="sm" 
+                      onClick={() => this.switchDestinations()}
+                    >
+                      <FaRandom/>
+                    </Button>
+                      <Geolookup
+                          inputClassName="geolookup__input--nominatim"
+                          placeholder={"Where do you want to go?"}
+                          onSuggestsLookup={this.onSuggestsLookup.bind(this)}
+                          onGeocodeSuggest={this.onGeocodeSuggest.bind(this)}
+                          onSuggestSelect={this.onSuggestSelect2.bind(this)}
+                          getSuggestLabel={this.getSuggestLabel.bind(this)}/>
+                  </ButtonToolbar>
+                </Form.Group>
                 <Form.Group>
                   <InputGroup>
                     <InputGroup.Prepend>
@@ -147,13 +232,7 @@ import "../components/DatePicker/customDatePickerWidth.css";
                 >
                   Advanced Options
                 </Button>
-                <Button  
-                  variant="outline-primary"  
-                  size="sm" 
-                  onClick={() => navigator.geolocation.getCurrentPosition(this.showPosition)}
-                >
-                  Locate (Needs testing)
-                </Button>
+                
 
                 <Collapse in={this.state.showText}>
                   <div>
@@ -163,20 +242,20 @@ import "../components/DatePicker/customDatePickerWidth.css";
                           <Form.Check 
                             custom inline type="radio" 
                             name="LeaveArrive" 
-                            label="LEAVE" 
-                            value="LEAVE" 
+                            label="Leave" 
+                            value="Leave" 
                             id="custom-checkbox-1" 
                             onChange={($event) => this.changeInput('LeaveArrive', $event.target.value)} 
-                            checked={LeaveArrive === "LEAVE"} 
+                            checked={LeaveArrive === "Leave"} 
                             />
                           <Form.Check 
                             custom inline type="radio" 
                             name="LeaveArrive" 
-                            label="ARRIVE" 
-                            value="ARRIVE" 
+                            label="Arrive" 
+                            value="Arrive" 
                             id="custom-checkbox-2" 
                             onChange={($event) => this.changeInput('LeaveArrive', $event.target.value)} 
-                            checked={LeaveArrive === "ARRIVE"} 
+                            checked={LeaveArrive === "Arrive"} 
                           />
                         </div>
                       </Form.Group>
@@ -252,6 +331,13 @@ import "../components/DatePicker/customDatePickerWidth.css";
       </React.Fragment>
     )
   }
+
+/**
+* Returns label field value from suggest results
+* @param  {Object} suggest The suggest
+* @return {String} label to use for the suggest
+*/
+
 }
 
 export default withRouter(TripForm);
