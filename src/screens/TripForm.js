@@ -30,6 +30,8 @@ import Geolookup from 'react-geolookup';
 
       Origin: "",
       Destination: "",
+      displayOrigin: "",
+      displayDestination: "",
       LeaveArrive: "Leave",
       startDate: currentDate,
       tripMonth: currentDate.getMonth() + 1,
@@ -96,14 +98,19 @@ import Geolookup from 'react-geolookup';
   showPosition = (position) =>
   {
     this.setState({['Origin']: position.coords.latitude + ', ' + position.coords.longitude})
+    this.setState({'displayOrigin': "Current Position"})
     console.log(this.state.Origin);
   }
   switchDestinations = () =>
   {
     let temp = this.state.Destination;
-    let temp2 = this.state.Origin
+    let temp2 = this.state.Origin;
+    let temp3 = this.state.displayOrigin;
+    let temp4 = this.state.displayDestination
     this.setState({['Origin']: temp})
     this.setState({['Destination']: temp2})
+    this.setState({['displayOrigin']: temp4})
+    this.setState({['displayDestination']: temp3})
   }
 
   onSuggestsLookup =(userInput) =>{
@@ -135,15 +142,14 @@ import Geolookup from 'react-geolookup';
   * @param  {Object} suggest The suggest
   */
   onSuggestSelect(suggest) {
-    console.log(suggest)
-    //This doesnt work for some reason
   this.changeInput('Origin', suggest.location.lat +  ", " + suggest.location.lon)
-  console.log(this.state.Origin)
+  this.changeInput('displayOrigin', suggest.label)
+  console.log(this.state.displayOrigin)
   }
   onSuggestSelect2(suggest) {
-    console.log(suggest)
-    //This doesnt work for some reason
-  this.changeInput('Destination', suggest.location.lat +  ", " + suggest.location.lon)
+    this.changeInput('Destination', suggest.location.lat +  ", " + suggest.location.lon)
+    this.changeInput('displayDestination', suggest.label)
+    console.log(this.state.displayDestination)
 }
 
   render() {
@@ -156,7 +162,7 @@ import Geolookup from 'react-geolookup';
       slidesToShow: 1,
       slidesToScroll: 1   
     }
-    let { carouselImages, Origin, Destination, LeaveArrive, optimize, maxWalkDistance} = this.state;
+    let { carouselImages, Origin, Destination, LeaveArrive, optimize, maxWalkDistance, displayDestination, displayOrigin} = this.state;
     return (
       
       <React.Fragment>
@@ -178,6 +184,7 @@ import Geolookup from 'react-geolookup';
                       <FaLocationArrow />
                     </Button>
                       <Geolookup
+                          initialValue={this.state.displayOrigin}
                           inputClassName="geolookup__input--nominatim"
                           placeholder={"Ex. Florida International University"}
                           onSuggestsLookup={this.onSuggestsLookup.bind(this)}
@@ -196,6 +203,7 @@ import Geolookup from 'react-geolookup';
                       <FaRandom/>
                     </Button>
                       <Geolookup
+                          initialValue={this.state.displayDestination}
                           inputClassName="geolookup__input--nominatim"
                           placeholder={"Where do you want to go?"}
                           onSuggestsLookup={this.onSuggestsLookup.bind(this)}
