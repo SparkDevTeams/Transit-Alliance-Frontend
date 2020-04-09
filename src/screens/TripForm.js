@@ -95,7 +95,8 @@ import Geolookup from 'react-geolookup';
   }
   showPosition = (position) =>
   {
-    this.setState({['Origin']: [position.coords.latitude, ' ' + position.coords.longitude]})
+    this.setState({['Origin']: position.coords.latitude + ', ' + position.coords.longitude})
+    console.log(this.state.Origin);
   }
   switchDestinations = () =>
   {
@@ -136,12 +137,13 @@ import Geolookup from 'react-geolookup';
   onSuggestSelect(suggest) {
     console.log(suggest)
     //This doesnt work for some reason
-  this.changeInput('Origin', [suggest.location.lat,  " " + suggest.location.lon])
+  this.changeInput('Origin', suggest.location.lat +  ", " + suggest.location.lon)
+  console.log(this.state.Origin)
   }
   onSuggestSelect2(suggest) {
     console.log(suggest)
     //This doesnt work for some reason
-  this.changeInput('Destination', [suggest.location.lat,  " " + suggest.location.lon])
+  this.changeInput('Destination', suggest.location.lat +  ", " + suggest.location.lon)
 }
 
   render() {
