@@ -3,14 +3,15 @@ import { Map, Marker, Popup, TileLayer, Polyline, Circle } from "react-leaflet";
 import { Accordion, Card } from "react-bootstrap";
 import { withRouter, Redirect } from "react-router-dom";
 import { Sidebar, Tab } from "react-leaflet-sidetabs";
-import { FiChevronRight } from "react-icons/fi";
+import { FiChevronRight, FiMapPin } from "react-icons/fi";
 import {
   FaWalking,
   FaBusAlt,
   FaClock,
   FaRoute,
   FaBus,
-  FaHome
+  FaHome,
+  FaChevronCircleRight
 } from "react-icons/fa";
 import Slider from "../components/Slider/Slider";
 import "../api/api";
@@ -48,6 +49,7 @@ const Maps = (props) =>
     //map position
     var position = [25.8, -80.3];
     var zoomLevel = 12;
+    const [count, setCount] = useState(0);
 
     if (!newInfo && !props.location.state) {
       return <Redirect to="/"></Redirect>;
@@ -77,6 +79,18 @@ const Maps = (props) =>
                 {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getMinutes() < 10 ? '0' : ''}
                 {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getMinutes()}
                 {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getHours() >= 12 ? " PM" : " AM"} 
+                </p>
+              <p>
+                Arrive in {new Intl.NumberFormat("en-GB", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                        }).format((newInfo?.time?.walkingTime + newInfo?.time?.transitTime + newInfo?.time?.waitingTime)/60) } minutes
+              </p>
+              <p>
+                Compared to {new Intl.NumberFormat("en-GB", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                        }).format((oldInfo?.time?.walkingTime + oldInfo?.time?.transitTime + oldInfo?.time?.waitingTime)/60) } minutes
               </p>
               
               {newInfo?.legInfo?.map((info, idx) => (
@@ -84,16 +98,21 @@ const Maps = (props) =>
                 <Accordion activeKey={`${currentStep}`}>
                   <Card>
                     <Accordion.Toggle as={Card.Header} eventKey={`${idx}`}>
-                      <p>via {info.departurePlace}</p>
+                      <p>From {info.departurePlace}</p>
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey={`${idx}`}>
                       <Card.Body>
                         <p>
-                          <FaBusAlt /> Depart from {info.departurePlace}
+                          {info.transitMode === "BUS" ? <FaBusAlt/> : <FaWalking/>}
+                          {info.transitMode === "BUS" ? "Transfer to " : "Walk to "}
+                          {info.arrivalPlace}
                         </p>
                         <p>
                           <FaClock /> Estimated duration:{" "}
-                            {((info.arrivalTime - info.departureTime) / 1000) / 60} minutes
+                            {new Intl.NumberFormat("en-GB", {
+                              minimumFractionDigits: 0,
+                              maximumFractionDigits: 0
+                            }).format((info.legDuration) / 60) } minutes
                         </p>
                       </Card.Body>
                     </Accordion.Collapse>
@@ -105,7 +124,7 @@ const Maps = (props) =>
           </Tab>
         </Sidebar>
 
-        <Map center={position} zoom={zoomLevel} ref={mapRef}>
+        <Map center={position} zoom={zoomLevel} ref={mapRef} maxZoom={19}>
         {oldInfo?.legInfo?.map((info, idx) => (
           <>
               <Polyline
@@ -123,7 +142,19 @@ const Maps = (props) =>
                 opacity={.6}
               >
                 <Popup>
-                      <FaBusAlt/> {((info.arrivalTime - info.departureTime) / 1000) / 60} minutes
+                  <div align="center">
+                    <p>Old Route:</p>
+                    <p>
+                      {new Intl.NumberFormat("en-GB", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                        }).format((oldInfo?.time?.walkingTime + oldInfo?.time?.transitTime + oldInfo?.time?.waitingTime)/60) } minutes
+                    </p>
+                    <p>{oldInfo?.legInfo?.map((info, idx) => (info.arrivalPlace === "Destination" ? <FiMapPin/> : (info.transitMode === "BUS" ? <> <FaBusAlt/> <FiChevronRight/></>:<><FaWalking/><FiChevronRight/></>)))}</p>
+                  </div>
+                  {/*oldInfo?.legInfo?.map((info, idx) => 
+                  () => {count(((info.arrivalTime - info.departureTime) / 1000) / 60)})}
+                  {count + " mins"*/}
                 </Popup>
               </Polyline>
             </>
