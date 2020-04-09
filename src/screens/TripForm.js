@@ -119,9 +119,6 @@ import "../components/DatePicker/customDatePickerWidth.css";
 
                 <Form.Group>
                   <InputGroup>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text id="inputGroupPrepend"><FaLocationArrow /></InputGroup.Text>
-                    </InputGroup.Prepend>
                     <Form.Control
                       placeholder="Ex. Florida International University"
                       type="text" name="Origin"
