@@ -106,7 +106,7 @@ import "../components/DatePicker/customDatePickerWidth.css";
       slidesToShow: 1,
       slidesToScroll: 1   
     }
-    let { carouselImages, months, Origin, Destination, LeaveArrive, tripYear, tripMonth, tripDay, tripHour, tripMinute, tripAMPM, optimize, maxWalkDistance} = this.state;
+    let { carouselImages, Origin, Destination, LeaveArrive, optimize, maxWalkDistance} = this.state;
     return (
       <React.Fragment>
         <div id="classicformpage">
@@ -222,7 +222,7 @@ import "../components/DatePicker/customDatePickerWidth.css";
                       </Form.Group>
 
 
-                      <p>Date and Time</p>
+                      <p>Date and Time:</p>
                       <div className="customDatePickerWidth">
                         <DatePicker
                         selected={this.state.startDate}

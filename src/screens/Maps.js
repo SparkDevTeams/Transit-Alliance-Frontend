@@ -78,11 +78,10 @@ const Maps = (props) =>
                 {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getMinutes()}
                 {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getHours() >= 12 ? " PM" : " AM"} 
               </p>
-
-              <p>Current date: {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).toString()}</p>
               
               {newInfo?.legInfo?.map((info, idx) => (
                 <>
+
                 <Accordion activeKey={`${currentStep}`}>
                   <Card>
                     <Accordion.Toggle as={Card.Header} eventKey={`${idx}`}>
