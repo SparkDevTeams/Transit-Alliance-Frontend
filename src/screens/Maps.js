@@ -73,7 +73,7 @@ const Maps = (props) =>
                 currentStep={currentStep}
               />
               
-              <p>Arrive at {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getHours() + 12}:
+              <p>Arrive at {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getHours() - 12}:
                 {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getMinutes() < 10 ? '0' : ''}
                 {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getMinutes()}
                 {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getHours() >= 12 ? " PM" : " AM"} 
