@@ -26,6 +26,9 @@ const Maps = (props) =>
   const [oldInfo, setOldInfo] = useState(props.location?.state?.oldInfo);
   const [currentStepInfo, setCurrentStepInfo] = useState(newInfo?.legInfo?.[currentStep]);
 
+  let hours = (new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getHours();
+  let minutes = (new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getMinutes();
+
 
   const mapRef = useRef();
 
@@ -75,23 +78,27 @@ const Maps = (props) =>
                 currentStep={currentStep}
               />
               
-              <p>Arrive at {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getHours() - 12}:
-                {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getMinutes() < 10 ? '0' : ''}
-                {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getMinutes()}
-                {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getHours() >= 12 ? " PM" : " AM"} 
+              <h6>
+                <b>
+                  Arrive at {hours > 12 ? hours - 12 : hours}:
+                  {minutes < 10 ? '0' : ''}
+                  {minutes}
+                  {hours > 12 ? " PM" : " AM"} 
+                </b>
+              </h6>
+
+              <p style={{ paddingTop: "10px" }}>
+                  Arrive in {new Intl.NumberFormat("en-GB", {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0
+                          }).format((newInfo?.time?.walkingTime + newInfo?.time?.transitTime + newInfo?.time?.waitingTime)/60) } minutes
                 </p>
-              <p>
-                Arrive in {new Intl.NumberFormat("en-GB", {
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 0
-                        }).format((newInfo?.time?.walkingTime + newInfo?.time?.transitTime + newInfo?.time?.waitingTime)/60) } minutes
-              </p>
-              <p>
-                Compared to {new Intl.NumberFormat("en-GB", {
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 0
-                        }).format((oldInfo?.time?.walkingTime + oldInfo?.time?.transitTime + oldInfo?.time?.waitingTime)/60) } minutes
-              </p>
+                <p style={{ marginTop: "-10px"}}>
+                  Compared to {new Intl.NumberFormat("en-GB", {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0
+                          }).format((oldInfo?.time?.walkingTime + oldInfo?.time?.transitTime + oldInfo?.time?.waitingTime)/60) } minutes
+                </p>
               
               {newInfo?.legInfo?.map((info, idx) => (
                 <>
@@ -102,12 +109,12 @@ const Maps = (props) =>
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey={`${idx}`}>
                       <Card.Body>
-                        <p>
+                        <p className="text-left">
                           {info.transitMode === "BUS" ? <FaBusAlt/> : <FaWalking/>}
                           {info.transitMode === "BUS" ? "Transfer to " : "Walk to "}
                           {info.arrivalPlace}
                         </p>
-                        <p>
+                        <p className="text-left">
                           <FaClock /> Estimated duration:{" "}
                             {new Intl.NumberFormat("en-GB", {
                               minimumFractionDigits: 0,
@@ -131,14 +138,14 @@ const Maps = (props) =>
                 positions={info.legPolyline}
                 color={"black"}
                 dashArray={info.transitMode === "WALK" ? "1,10" : undefined}
-                weight={info.transitMode === "BUS" ? 9 : 6}
+                weight={info.transitMode === "BUS" ? 7 : 4}
                 opacity={.4}
               />
               <Polyline
                 positions={info.legPolyline}
                 color={info.transitMode === "BUS" ? "grey" : "grey"}
                 dashArray={info.transitMode === "WALK" ? "1,10" : undefined}
-                weight={info.transitMode === "BUS" ? 8 : 5}
+                weight={info.transitMode === "BUS" ? 6 : 3}
                 opacity={.6}
               >
                 <Popup>
@@ -167,7 +174,7 @@ const Maps = (props) =>
                 positions={info.legPolyline}
                 color={"black"}
                 dashArray={info.transitMode === "WALK" ? "1,10" : undefined}
-                weight={info.transitMode === "BUS" ? 9 : 6}
+                weight={info.transitMode === "BUS" ? 7 : 4}
               />
               <Polyline
                 positions={info.legPolyline}
@@ -175,7 +182,7 @@ const Maps = (props) =>
                   info.transitMode === "BUS" ? "#" + info.routeColor : "blue"
                 }
                 dashArray={info.transitMode === "WALK" ? "1,10" : undefined}
-                weight={info.transitMode === "BUS" ? 8 : 5}
+                weight={info.transitMode === "BUS" ? 6 : 3}
               />
               {idx === 0 ? null : (
                 <>

@@ -290,7 +290,7 @@ import Geolookup from 'react-geolookup';
                         </div>
                       </Form.Group>
                       <Form.Group>
-                        <Form.Label>Max Walk Distance:</Form.Label>
+                        <Form.Label>Maximum Walking Distance:</Form.Label>
                         <InputGroup>
                           <Form.Control 
                             as="select" 
