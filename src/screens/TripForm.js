@@ -10,52 +10,51 @@ import API from '../api/api';
 import {Container, Row, Col, Collapse } from 'react-bootstrap';
 import {} from "react-icons/fa";
 import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "../components/DatePicker/customDatePickerWidth.css";
 
 
  class TripForm extends React.Component {
   constructor(props) {
-    var today = new Date();
 
     super(props);
+    const currentDate = new Date();
     this.state = {
       carouselImages: [
         'bus-a.jpg',
         'bus-b.jpg'
       ],
-      
-      months: 
-      [
-        {label: "January", value: 1}, 
-        {label: "February", value: 2}, 
-        {label: "March", value: 3}, 
-        {label: "April", value: 4}, 
-        {label: "May", value: 5}, 
-        {label: "June", value: 6}, 
-        {label: "July", value: 7}, 
-        {label: "August", value: 8}, 
-        {label: "September", value: 9}, 
-        {label: "October", value: 10}, 
-        {label: "November", value: 11}, 
-        {label: "December", value: 12}
-      ],
+
       Origin: "",
       Destination: "",
       LeaveArrive: "Leave",
-      tripMonth: today.getMonth(),
-      tripDay: today.getDate(),
-      tripYear: today.getFullYear(),
-      tripHour: today.getHours() > 12 ? today.getHours() - 12 : today.getHours(),
-      tripMinute: today.getMinutes(),
-      tripAMPM: today.getHours() >= 12 ? "PM" : "AM",
+      startDate: currentDate,
+      tripMonth: currentDate.getMonth() + 1,
+      tripDay: currentDate.getDate(),
+      tripYear: currentDate.getFullYear(),
+      tripHour: currentDate.getHours() > 12 ? currentDate - 12 : currentDate.getHours(),
+      tripMinute: currentDate.getMinutes(),
+      tripAMPM: currentDate.getHours() >= 12 ? "PM" : "AM",
       timeInfo: [],
       tripInfo: [],
       completeInfo: [],
       optimize: "QUICK",
-      maxWalkDistance: "1"
+      maxWalkDistance: "1",
+      collapseID: "",
     }
   }
-  state = {
-    collapseID: ""
+   
+   handleChange = date => {
+    this.setState({
+      startDate: date,
+      tripMonth: date.getMonth() + 1,
+      tripDay: date.getDate(),
+      tripYear: date.getFullYear(),
+      tripHour: date.getHours() > 12 ? date - 12 : date.getHours(),
+      tripMinute: date.getMinutes(),
+      tripAMPM: date.getHours() >= 12 ? "PM" : "AM",
+    });
   };
 
   toggleCollapse = collapseID => () =>
@@ -67,30 +66,30 @@ import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
       [key]: val
     })
   }
-
+  
   submitHandle = async (event) => {
     event.preventDefault();
-
+    console.log(this.state.startDate)
     let query = {
       fromPlace: this.state.Origin,
       toPlace: this.state.Destination,
       startTime: `${this.state.tripHour}:${this.state.tripMinute}${this.state.tripAMPM}`,
-      startDate: `${this.state.tripMonth}-${this.state.tripDay}-${this.state.tripYear}`,
+      startDate: `${this.state.tripMonth.toString().padStart(2, '0')}-${this.state.tripDay.toString().padStart(2, '0')}-${this.state.tripYear}`,
       arriveBy: this.state.LeaveArrive === 'Leave' ? 'false' : 'true',
       optimize: this.state.optimize,
       maxWalkDistance: `${this.state.maxWalkDistance}`
     }
-
-    let response = await API.getTripInfo(query);
-    this.props.history.push(
-        {
-            pathname: '/maps', 
-            state : {
-                oldInfo: response.oldResponse, 
-                newInfo: response.prototypeResponse,
-            }
-        }
-    );
+    console.log(query);
+     let response = await API.getTripInfo(query);
+     this.props.history.push(
+         {
+             pathname: '/maps', 
+             state : {
+                 oldInfo: response.oldResponse, 
+                 newInfo: response.prototypeResponse,
+             }
+         }
+     );
   }
   showPosition = (position) =>
   {
@@ -107,7 +106,7 @@ import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
       slidesToShow: 1,
       slidesToScroll: 1   
     }
-    let { carouselImages, months, Origin, Destination, LeaveArrive, tripYear, tripMonth, tripDay, tripHour, tripMinute, tripAMPM, optimize, maxWalkDistance} = this.state;
+    let { carouselImages, Origin, Destination, LeaveArrive, optimize, maxWalkDistance} = this.state;
     return (
       <React.Fragment>
         <div id="classicformpage">
@@ -221,78 +220,21 @@ import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
                           </Form.Control>
                         </InputGroup>
                       </Form.Group>
-                      
-                      <Form.Group>
-                        <Form.Label>Date:</Form.Label>
-                        <InputGroup>
-                          <Form.Control 
-                            as="select" 
-                            name="tripMonth" 
-                            value={tripMonth} 
-                            onChange={($event) => this.changeInput('tripMonth', $event.target.value)}>
-                              {months.map((month, idx) => 
-                                <option 
-                                  value={month.value} 
-                                  key={idx}>{month.label}
-                                </option>)}
-                          </Form.Control>
-                          <Form.Control 
-                            as="select" 
-                            name="tripDay" 
-                            value={tripDay} 
-                            onChange={($event) => this.changeInput('tripDay', $event.target.value)}>
-                              {[...Array(31)].map((date, idx) => 
-                                <option value={idx + 1} key={idx}>
-                                  {idx < 9 ? '0' + (idx + 1) : idx + 1}
-                                </option>)}
-                          </Form.Control>
-                          <Form.Control 
-                            as="select" 
-                            name="tripYear" 
-                            value={tripYear} 
-                            onChange={($event) => this.changeInput('tripYear', $event.target.value)}>
-                              <option value="2020">2020</option>
-                              <option value="2021">2021</option>
-                              <option value="2022">2022</option>
-                              <option value="2023">2023</option>
-                              <option value="2024">2024</option>
-                          </Form.Control>
-                        </InputGroup>
-                      </Form.Group>
-                      
-                      <Form.Group>
-                        <Form.Label>Time:</Form.Label>
-                        <InputGroup>
-                          <Form.Control 
-                            as="select" 
-                            name="tripHour" 
-                            value={tripHour} 
-                            onChange={($event) => this.changeInput('tripHour', $event.target.value)}>
-                              {[...Array(12)].map((hour, idx) => 
-                                <option value={idx + 1} key={idx}>
-                                  {idx < 9 ? '0' + (idx + 1) : idx + 1}
-                                </option>)}
-                          </Form.Control>
-                          <Form.Control 
-                            as="select" 
-                            name="tripMinute" 
-                            value={tripMinute} 
-                            onChange={($event) => this.changeInput('tripMinute', $event.target.value)}>
-                              {[...Array(60)].map((minute, idx) => 
-                                <option value={idx + 1} key={idx}>
-                                  {idx < 9 ? '0' + (idx + 1) : idx + 1}
-                                </option>)}
-                          </Form.Control>
-                          <Form.Control 
-                            as="select" 
-                            name="tripAMPM" 
-                            value={tripAMPM} 
-                            onChange={($event) => this.changeInput('tripAMPM', $event.target.value)}>
-                              <option value="am">AM</option>
-                              <option value="pm">PM</option>
-                          </Form.Control>
-                        </InputGroup>
-                      </Form.Group>
+
+
+                      <p>Date and Time:</p>
+                      <div className="customDatePickerWidth">
+                        <DatePicker
+                        selected={this.state.startDate}
+                        onChange={this.handleChange}
+                        showTimeSelect
+                        timeFormat="HH:mm"
+                        timeIntervals={15}
+                        timeCaption="time"
+                        dateFormat="MMMM d, yyyy h:mm aa"
+                        />
+                      </div>
+                    
                     </span>
                   </div>
                 </Collapse>
@@ -311,7 +253,5 @@ import { FaLocationArrow, FaCrosshairs } from "react-icons/fa";
     )
   }
 }
-
-
 
 export default withRouter(TripForm);

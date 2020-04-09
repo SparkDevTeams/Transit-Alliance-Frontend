@@ -25,6 +25,7 @@ const Maps = (props) =>
   const [oldInfo, setOldInfo] = useState(props.location?.state?.oldInfo);
   const [currentStepInfo, setCurrentStepInfo] = useState(newInfo?.legInfo?.[currentStep]);
 
+
   const mapRef = useRef();
 
   const onClose = () => {
@@ -72,10 +73,10 @@ const Maps = (props) =>
                 currentStep={currentStep}
               />
               
-              <p>Arrive at {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].departureTime)).getHours()}:
-                {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].departureTime)).getMinutes() < 10 ? '0' : ''}
-                {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].departureTime)).getMinutes()}
-                {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].departureTime)).getHours() >= 12 ? " PM" : " AM"} 
+              <p>Arrive at {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getHours() - 12}:
+                {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getMinutes() < 10 ? '0' : ''}
+                {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getMinutes()}
+                {(new Date(newInfo?.legInfo?.[newInfo?.legInfo?.length - 1].arrivalTime)).getHours() >= 12 ? " PM" : " AM"} 
               </p>
               
               {newInfo?.legInfo?.map((info, idx) => (
