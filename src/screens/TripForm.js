@@ -272,20 +272,20 @@ import Geolookup from 'react-geolookup';
                           <Form.Check 
                             custom inline type="radio" 
                             name="optimize" 
-                            label="QUICK" 
-                            value="QUICK" 
+                            label="Less Walking" 
+                            value="Less Walking" 
                             id="custom-checkbox-3" 
                             onChange={($event) => this.changeInput('optimize', $event.target.value)} 
-                            checked={optimize === "QUICK"} 
+                            checked={optimize === "Less Walking"} 
                           />
                           <Form.Check 
                             custom inline type="radio" 
                             name="optimize" 
-                            label="TRANSFERS" 
-                            value="TRANSFERS" 
+                            label="Fewer Transfers" 
+                            value="Fewer Transfers" 
                             id="custom-checkbox-4" 
                             onChange={($event) => this.changeInput('optimize', $event.target.value)} 
-                            checked={optimize === "TRANSFERS"} 
+                            checked={optimize === "Fewer Transfers"} 
                           />
                         </div>
                       </Form.Group>
@@ -298,9 +298,9 @@ import Geolookup from 'react-geolookup';
                             name="maxWalkDistance" 
                             value={maxWalkDistance} 
                             onChange={($event) => this.changeInput('maxWalkDistance', $event.target.value)}>
-                              <option>.5 mi</option>
-                              <option>.75 mi</option>
-                              <option>1 mi</option>
+                              <option>.5 mi (General Distance)</option>
+                              <option>.75 mi (Acceptable Distance)</option>
+                              <option>1 mi (Maximum Distance)</option>
                           </Form.Control>
                         </InputGroup>
                       </Form.Group>
@@ -311,11 +311,9 @@ import Geolookup from 'react-geolookup';
                         <DatePicker
                         selected={this.state.startDate}
                         onChange={this.handleChange}
-                        showTimeSelect
-                        timeFormat="HH:mm"
-                        timeIntervals={15}
-                        timeCaption="time"
-                        dateFormat="MMMM d, yyyy h:mm aa"
+                        timeInputLabel="Time:"
+                        dateFormat="MM/dd/yyyy h:mm aa"
+                        showTimeInput
                         />
                       </div>
                     

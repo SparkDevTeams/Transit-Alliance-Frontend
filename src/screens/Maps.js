@@ -77,7 +77,7 @@ const Maps = (props) =>
                 setStep={value => setCurrentStep(value)}
                 currentStep={currentStep}
               />
-              
+             
               <h6>
                 <b>
                   Arrive at {hours > 12 ? hours - 12 : hours}:
