@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "47c97a9f3de721a04c12a747583a893b",
+    "revision": "c899a5f0db84cf500687151482d08d5d",
     "url": "/Transit-Alliance-Frontend/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Transit-Alliance-Frontend/static/css/2.def019a4.chunk.css"
   },
   {
-    "revision": "e3a7d67dff3004cee01a",
+    "revision": "b8d21341be3d97f51030",
     "url": "/Transit-Alliance-Frontend/static/css/main.ef4919c1.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Transit-Alliance-Frontend/static/js/2.f37bfec1.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e3a7d67dff3004cee01a",
-    "url": "/Transit-Alliance-Frontend/static/js/main.7693073b.chunk.js"
+    "revision": "b8d21341be3d97f51030",
+    "url": "/Transit-Alliance-Frontend/static/js/main.71f28175.chunk.js"
   },
   {
     "revision": "cc6539a1f24c15337d2f",
