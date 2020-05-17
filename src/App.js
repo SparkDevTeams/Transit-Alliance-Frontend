@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 class App extends React.Component {
   render() {
     return (
-      <Router basename="https://sparkdevteams.github.io/Transit-Alliance-Frontend/">
+      <Router basename="/">
         <Switch>
           <Route path="/maps">
             <Map />
