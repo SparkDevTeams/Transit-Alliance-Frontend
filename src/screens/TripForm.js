@@ -50,12 +50,13 @@ import Geolookup from 'react-geolookup';
   }
    
    handleChange = date => {
+     console.log(date.getHours());
     this.setState({
       startDate: date,
       tripMonth: date.getMonth() + 1,
       tripDay: date.getDate(),
       tripYear: date.getFullYear(),
-      tripHour: date.getHours() > 12 ? date - 12 : date.getHours(),
+      tripHour: date.getHours() > 12 ? date.getHours() - 12 : date.getHours(),
       tripMinute: date.getMinutes(),
       tripAMPM: date.getHours() >= 12 ? "PM" : "AM",
     });
@@ -83,7 +84,6 @@ import Geolookup from 'react-geolookup';
       optimize: this.state.optimize,
       maxWalkDistance: `${this.state.maxWalkDistance}`
     }
-    console.log(query);
      let response = await API.getTripInfo(query);
      this.props.history.push(
          {
@@ -144,12 +144,10 @@ import Geolookup from 'react-geolookup';
   onSuggestSelect(suggest) {
   this.changeInput('Origin', suggest.location.lat +  ", " + suggest.location.lon)
   this.changeInput('displayOrigin', suggest.label)
-  console.log(this.state.displayOrigin)
   }
   onSuggestSelect2(suggest) {
     this.changeInput('Destination', suggest.location.lat +  ", " + suggest.location.lon)
     this.changeInput('displayDestination', suggest.label)
-    console.log(this.state.displayDestination)
 }
 
   render() {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = 'https://gtfs-comparison.azurewebsites.net/';
+const baseUrl = 'https://fultongarcia.com/ta/';
 
 const API = {
   getTripInfo: async function (body) {
